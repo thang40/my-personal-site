@@ -1,12 +1,9 @@
 import React from "react";
 import { Layout, Breadcrumb } from "antd";
-import { Auth0Provider, useAuth0 } from "../../auth";
 
 const { Content } = Layout;
 
 export const HomeRoute = () => {
-  const { loading, user } = useAuth0();
-  console.log(user);
   return (
     <React.Fragment>
       <Breadcrumb style={{ margin: "16px 0" }}>

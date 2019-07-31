@@ -1,33 +1,21 @@
 import React from "react";
 import { Sider, Footer, Header } from "./components";
-import { Layout, Breadcrumb } from "antd";
-import { RootReducer } from "./combine";
+import createSagaMiddleware from "redux-saga";
+import { Layout } from "antd";
+import { RootReducer, rootSaga } from "./combine";
 import { useSpring } from "react-spring";
-import { FancyBg } from "my-react-spring-comp-lib";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { HomeRoute, BlogRoute } from "./routes";
-import { Auth0Provider, useAuth0 } from "./auth";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HomeRoute, BlogRoute, LoginRoute } from "./routes";
 import "./App.css";
 
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-
-const { REACT_APP_OAUTH_DOMAIN, REACT_APP_OAUTH_CLIENT_ID } = process.env;
+import { createStore, applyMiddleware } from "redux";
 
 const App = () => {
-  const onRedirectCallback = appState => {
-    window.history.replaceState(
-      {},
-      document.title,
-      appState && appState.targetUrl
-        ? appState.targetUrl
-        : window.location.pathname
-    );
-  };
-  const store = createStore(
-    RootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(RootReducer, applyMiddleware(sagaMiddleware));
+
+  sagaMiddleware.run(rootSaga);
 
   const [props, set] = useSpring(() => ({
     xy: [0, 0],
@@ -47,28 +35,20 @@ const App = () => {
         class="container"
         onMouseMove={({ clientX: x, clientY: y }) => set({ xy: calc(x, y) })}
       >
-        <Auth0Provider
-          domain={REACT_APP_OAUTH_DOMAIN}
-          client_id={REACT_APP_OAUTH_CLIENT_ID}
-          redirect_uri={window.location.origin}
-          onRedirectCallback={onRedirectCallback}
-        >
-          <FancyBg>
-            <Router>
-              <Layout>
-                <Header />
-                <Layout>
-                  <Sider style={style} />
-                  <Layout style={{ padding: "0 24px 24px" }}>
-                    <Route path="/" exact component={HomeRoute} />
-                    <Route path="/blog" exact component={BlogRoute} />
-                  </Layout>
-                </Layout>
-                <Footer />
+        <Router>
+          <Layout>
+            <Header />
+            <Layout>
+              <Sider style={style} />
+              <Layout style={{ padding: "0 24px 24px" }}>
+                <Route path="/" exact component={HomeRoute} />
+                <Route path="/blog" exact component={BlogRoute} />
+                <Route path="/login" exact component={LoginRoute} />
               </Layout>
-            </Router>
-          </FancyBg>
-        </Auth0Provider>
+            </Layout>
+            <Footer />
+          </Layout>
+        </Router>
       </div>
     </Provider>
   );

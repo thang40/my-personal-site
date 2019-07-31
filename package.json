@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@auth0/auth0-spa-js": "^1.1.1",
     "airtable": "^0.6.0",
     "antd": "^3.20.5",
     "my-react-spring-comp-lib": "^1.0.3",

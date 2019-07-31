@@ -1,11 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "../../auth";
 import { Layout, Menu } from "antd";
 
 export const Header = () => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-  console.log(isAuthenticated);
   return (
     <Layout.Header>
       <div className="logo" />
@@ -21,12 +18,8 @@ export const Header = () => {
         <Menu.Item key="2">
           <Link to="/blog">Blog</Link>
         </Menu.Item>
-        <Menu.Item>
-          {!isAuthenticated && (
-            <button onClick={() => loginWithRedirect({})}>Log in</button>
-          )}
-
-          {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
+        <Menu.Item key="3">
+          <Link to="/login">Login</Link>
         </Menu.Item>
       </Menu>
     </Layout.Header>
