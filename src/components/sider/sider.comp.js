@@ -1,22 +1,32 @@
-import React, { Component } from "react";
-import { Menu, Icon, Layout } from "antd";
+import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import { Avatar } from "../avatar/avatar.comp";
+import { ThemeContext } from "../../context/theme.context";
 
-const { SubMenu } = Menu;
+// const { SubMenu } = Menu;
 
-export class Sider extends Component {
-  handleClick = e => {
-    console.log("click ", e);
-  };
+export const Sider = ({ style }) => {
+  const theme = useContext(ThemeContext);
 
-  render() {
-    const { style } = this.props;
-    return (
-      <Layout.Sider width={256} style={{ background: "#fff" }}>
-        <div style={{ textAlign: "center", padding: "56px" }}>
-          <Avatar style={style} />
-        </div>
-        <Menu
+  return (
+    <div
+      breakpoint="md"
+      trigger={null}
+      collapsedWidth="0"
+      collapsible={true}
+      width={256}
+      style={{ background: "#fff" }}
+    >
+      <div
+        style={{
+          textAlign: "center",
+          padding: "56px",
+          background: theme.theme.background
+        }}
+      >
+        <Avatar style={style} />
+      </div>
+      {/* <Menu
           onClick={this.handleClick}
           defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
@@ -70,8 +80,11 @@ export class Sider extends Component {
             <Menu.Item key="11">Option 11</Menu.Item>
             <Menu.Item key="12">Option 12</Menu.Item>
           </SubMenu>
-        </Menu>
-      </Layout.Sider>
-    );
-  }
-}
+        </Menu> */}
+    </div>
+  );
+};
+
+Sider.propTypes = {
+  style: PropTypes.object
+};

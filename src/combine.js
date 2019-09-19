@@ -1,13 +1,20 @@
 import { combineReducers } from "redux";
-import { HomeReducer, BlogReducer, LoginReducer, LoginSaga } from "./ducks";
-import { all } from "redux-saga/effects";
+import {
+  HomeReducer,
+  BlogReducer,
+  AuthReducer,
+  AuthSaga,
+  BlogSaga,
+  initUserData
+} from "./ducks";
+import { all, fork } from "redux-saga/effects";
 
 export const RootReducer = combineReducers({
-  LoginReducer,
-  HomeReducer,
-  BlogReducer
+  BlogReducer,
+  AuthReducer,
+  HomeReducer
 });
 
 export function* rootSaga() {
-  yield all([...LoginSaga]);
+  yield all([...AuthSaga, ...BlogSaga, fork(initUserData)]);
 }

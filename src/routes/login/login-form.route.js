@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
-import "./login-form.route.css";
+import styles from "./login-form.module.css";
 
 export class LoginForm extends Component {
   handleSubmit = e => {
@@ -17,7 +17,7 @@ export class LoginForm extends Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <React.Fragment>
-        <Form onSubmit={this.handleSubmit} className="login-form">
+        <Form onSubmit={this.handleSubmit} className={styles["login-form"]}>
           <Form.Item>
             {getFieldDecorator("username", {
               rules: [
@@ -52,17 +52,17 @@ export class LoginForm extends Component {
               valuePropName: "checked",
               initialValue: true
             })(<Checkbox>Remember me</Checkbox>)}
-            <a className="login-form-forgot" href="">
+            <a className={styles["login-form-forgot"]} href="/a">
               Forgot password
             </a>
             <Button
               type="primary"
               htmlType="submit"
-              className="login-form-button"
+              className={styles["login-form-button"]}
             >
               Log in
             </Button>
-            Or <a href="">register now!</a>
+            Or <a href="/a">register now!</a>
           </Form.Item>
         </Form>
       </React.Fragment>

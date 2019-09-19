@@ -1,16 +1,38 @@
 import React from "react";
-import { Layout } from "antd";
+import { Navbar, Nav } from "react-bootstrap";
 
 export const Footer = () => {
   return (
-    <Layout.Footer
+    <Navbar
       style={{
         textAlign: "center",
         backgroundColor: "#fff",
         border: "solid 1px #f1f1f1"
       }}
+      className="justify-content-center flex-column"
     >
-      Siegen @2019
-    </Layout.Footer>
+      <Nav>
+        <Nav.Item>
+          <div>Siegen @2019</div>
+        </Nav.Item>
+      </Nav>
+      <Nav>
+        <Nav.Item>
+          <div>
+            Icons made by
+            <a
+              href="https://www.flaticon.com/authors/xnimrodx"
+              title="xnimrodx"
+            >
+              xnimrodx
+            </a>
+            from{" "}
+            <a href="https://www.flaticon.com/" title="Flaticon">
+              www.flaticon.com
+            </a>
+          </div>
+        </Nav.Item>
+      </Nav>
+    </Navbar>
   );
 };

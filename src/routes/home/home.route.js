@@ -1,17 +1,9 @@
 import React from "react";
-import { Layout, Breadcrumb } from "antd";
-
-const { Content } = Layout;
 
 export const HomeRoute = () => {
   return (
     <React.Fragment>
-      <Breadcrumb style={{ margin: "16px 0" }}>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>List</Breadcrumb.Item>
-        <Breadcrumb.Item>App</Breadcrumb.Item>
-      </Breadcrumb>
-      <Content
+      <div
         style={{
           background: "#fff",
           padding: 24,
@@ -20,7 +12,7 @@ export const HomeRoute = () => {
         }}
       >
         Home
-      </Content>
+      </div>
     </React.Fragment>
   );
 };

@@ -1,16 +1,53 @@
-const HOME_FETCH_SEARCH_REQUEST = "@@Home/FETCH_SEARCH_REQUEST";
+import { getBlogList, getBlogDetail } from "../services/hashnode.service";
+import { put, takeLatest } from "redux-saga/effects";
+
+const FETCH_BLOG_LIST_REQUEST = "@@Blog/FETCH_BLOG_LIST_REQUEST";
+const FETCH_BLOG_LIST_COMPLETE = "@@Blog/FETCH_BLOG_LIST_COMPLETE";
+
+const FETCH_BLOG_DETAILS_REQUEST = "@@Blog/FETCH_BLOG_DETAILS_REQUEST";
+const FETCH_BLOG_DETAILS_COMPLETE = "@@Blog/FETCH_BLOG_DETAILS_COMPLETE";
 
 // action creator
-export const searchRequestAction = searchText => {
-  return { type: HOME_FETCH_SEARCH_REQUEST, payload: searchText };
+export const fetchBlogListAction = (
+  handleNoDataFromComp,
+  handleErrorFromComp
+) => {
+  return {
+    type: FETCH_BLOG_LIST_REQUEST,
+    payload: { handleNoDataFromComp, handleErrorFromComp }
+  };
+};
+export const fetchBlogDetailAction = (
+  blogId,
+  handleSuccessFromComp,
+  handleErrorFromComp
+) => {
+  return {
+    type: FETCH_BLOG_DETAILS_REQUEST,
+    payload: { blogId, handleSuccessFromComp, handleErrorFromComp }
+  };
 };
 // reducer
 const initialState = {
-  searchData: []
+  blogs: [],
+  blogDetail: undefined
 };
 
 export const BlogReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_BLOG_LIST_COMPLETE: {
+      console.log("complete");
+      return {
+        ...state,
+        blogs: [...action.payload]
+      };
+    }
+    case FETCH_BLOG_DETAILS_COMPLETE: {
+      return {
+        ...state,
+        blogDetail: action.payload
+      };
+    }
     default: {
       return state;
     }
@@ -18,76 +55,45 @@ export const BlogReducer = (state = initialState, action) => {
 };
 
 // selector
-export const selectSearchResult = state => state.HomeReducer.searchData;
-export const selectJobOpeningsList = state => state.HomeReducer.jobs;
-export const selectVideoList = state => state.HomeReducer.videoList;
+export const selectBlogList = state => state.BlogReducer.blogs;
+export const selectBlogDetail = state => state.BlogReducer.blogDetail;
 
 // side effect
-// function* watchFetchSearchRequest(action) {
-//   yield call(delay, 700);
-//   const searchText = action.payload;
-//   let searchResult = [];
-//   if (searchText.trim() !== "") {
-//     searchResult = yield fetch(
-//       `https://5ba1fe9bee710f0014dd76ce.mockapi.io/api/v1/JobOpennings?search=${searchText}`
-//     ).then(res => {
-//       return res.json();
-//     });
-//   }
+function* watchFetchBlogList(action) {
+  const { handleNoDataFromComp, handleErrorFromComp } = action.payload;
+  try {
+    const blogs = yield getBlogList();
+    if (blogs.length === 0) {
+      handleNoDataFromComp();
+    }
 
-//   yield put({
-//     type: HomeActionTypes.FETCH_SEARCH_SUCCESS,
-//     payload: searchResult
-//   });
-// }
+    console.log(blogs);
+    yield put({
+      type: FETCH_BLOG_LIST_COMPLETE,
+      payload: blogs
+    });
+  } catch (error) {
+    handleErrorFromComp();
+  }
+}
 
-// function* watchFetchJobOpeningData() {
-//   yield call(delay, 700);
-//   const data = yield fetch(
-//     "https://5ba1fe9bee710f0014dd76ce.mockapi.io/api/v1/JobOpennings"
-//   ).then(result => result.json());
+function* watchFetchBlogDetail(action) {
+  const { blogId, handleSuccessFromComp, handleErrorFromComp } = action.payload;
+  try {
+    const detail = yield getBlogDetail(blogId);
 
-//   yield put({
-//     type: HomeActionTypes.FETCH_JOB_OPENINGS_SUCCESS,
-//     payload: data
-//   });
-// }
+    yield put({
+      type: FETCH_BLOG_DETAILS_COMPLETE,
+      payload: detail
+    });
 
-// function* watchFetchVideoList() {
-//   yield call(delay, 300);
-//   const data = [
-//     {
-//       videoItem: {
-//         title: "Youtube video",
-//         videoSource: "http://techslides.com/demos/sample-videos/small.mp4",
-//         showTitle: false,
-//         backgroundImage: "/images/blog-1.jpg"
-//       },
-//       postTitle: "Stuff I like to do on",
-//       postDetail: "This is detail of component video list item"
-//     },
-//     {
-//       videoItem: {
-//         title: "Youtube video",
-//         videoSource: "http://techslides.com/demos/sample-videos/small.mp4",
-//         showTitle: false,
-//         backgroundImage: "/images/blog-1.jpg"
-//       },
-//       postTitle: "Stuff I like to do on",
-//       postDetail: "This is detail of component video list item"
-//     }
-//   ];
-//   yield put({
-//     type: HomeActionTypes.FETCH_VIDEO_LIST_SUCCESS,
-//     payload: data
-//   });
-// }
+    handleSuccessFromComp();
+  } catch (error) {
+    handleErrorFromComp();
+  }
+}
 
-// export const HomeSaga = [
-//   takeLatest(HomeActionTypes.FETCH_SEARCH_REQUEST, watchFetchSearchRequest),
-//   takeLatest(HomeActionTypes.FETCH_VIDEO_LIST_REQUEST, watchFetchVideoList),
-//   takeLatest(
-//     HomeActionTypes.FETCH_JOB_OPENINGS_REQUEST,
-//     watchFetchJobOpeningData
-//   )
-// ];
+export const BlogSaga = [
+  takeLatest(FETCH_BLOG_LIST_REQUEST, watchFetchBlogList),
+  takeLatest(FETCH_BLOG_DETAILS_REQUEST, watchFetchBlogDetail)
+];

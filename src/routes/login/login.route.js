@@ -1,38 +1,45 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { LoginForm } from "./login-form.route";
-import { Form } from "antd";
-import { authAction } from "../../ducks";
+import { Redirect } from "react-router-dom";
+import { Row, Col } from "react-bootstrap";
+import { LoginForm } from "./login-form2.route";
+import { loginAction } from "../../ducks";
+import { useAuthStatus } from "../../hooks/commonHooks";
 
-const EnhancedLoginForm = Form.create()(LoginForm);
-
-class _LoginRoute extends Component {
-  handleLogin = values => {
-    const { authAction } = this.props;
-    authAction(values);
-    console.log(values);
+const _LoginRoute = ({ loginAction }) => {
+  const isAuth = useAuthStatus(false);
+  const handleLogin = values => {
+    loginAction(values);
   };
-  render() {
-    return (
-      <React.Fragment>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            height: "100%",
-            justifyContent: "center"
-          }}
-        >
-          <EnhancedLoginForm handleLogin={this.handleLogin} />
-        </div>
-      </React.Fragment>
-    );
-  }
-}
+  return (
+    <React.Fragment>
+      {isAuth ? <Redirect to="/user" /> : null}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          height: "100%",
+          justifyContent: "center",
+          background: "#fff",
+          padding: "1rem 0",
+          margin: 0
+        }}
+      >
+        <Row>
+          <Col>
+            <LoginForm handleLogin={handleLogin} />
+          </Col>
+        </Row>
+      </div>
+    </React.Fragment>
+  );
+};
 
 export const LoginRoute = connect(
-  () => {},
+  () => {
+    return {};
+  },
   {
-    authAction
+    loginAction: loginAction
   }
 )(_LoginRoute);

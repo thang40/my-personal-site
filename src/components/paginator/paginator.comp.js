@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const NumPager = ({ pageNum, isDisabled = false, pageClickCallback }) => {
   return isDisabled ? (
@@ -70,6 +71,16 @@ const Paginator = ({ numOfPage, curPage, pageClickCallback }) => {
       {curPage === numOfPage ? null : <NextPager pageNum={curPage + 1} />}
     </div>
   );
+};
+
+Paginator.propTypes = {
+  pageNum: PropTypes.number,
+  isDisabled: PropTypes.bool,
+  pageClickCallback: PropTypes.func
+};
+
+Paginator.defaultProps = {
+  isDisabled: false
 };
 
 export default Paginator;
