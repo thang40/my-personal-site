@@ -14,18 +14,13 @@ export const LoginForm = () => (
     <Formik
       validationSchema={schema}
       onSubmit={console.log}
-      initialValues={{}}
+      initialValues={{
+        username: "",
+        password: ""
+      }}
       validateOnChange={false}
     >
-      {({
-        handleSubmit,
-        handleChange,
-        handleBlur,
-        values,
-        touched,
-        isValid,
-        errors
-      }) => (
+      {({ handleSubmit, handleChange, values, errors }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Row>
             {/* USERNAME */}

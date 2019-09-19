@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { initService } from "./services/airtable.service";
+// import { initService } from "./services/airtable.service";
 // Init airtable service
 // initService();
 ReactDOM.render(<App />, document.getElementById("root"));

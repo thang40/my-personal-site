@@ -9,7 +9,6 @@ import styles from "./blogCard-comp.module.css";
 export const BlogCard = ({ title, cuid, coverImage, loading }) => {
   return (
     <Link className={styles["blog-card"]} to={`${ROUTES.BLOG_ROUTE}/${cuid}`}>
-      <div className={styles["overlay"]}></div>
       <Card>
         <Card.Img as="div">
           <ProgressiveImage src={coverImage} />

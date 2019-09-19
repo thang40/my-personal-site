@@ -15,7 +15,7 @@ const _BlogRoute = ({ fetchBlogList, blogs, history, ...rest }) => {
       history.push("/");
     };
     fetchBlogList(handleIfNoData, handleGetListError);
-  }, []);
+  }, [history, fetchBlogList]);
 
   const renderBlogList = () => {
     if (hasData) {

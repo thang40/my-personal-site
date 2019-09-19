@@ -1,4 +1,4 @@
-export * from "./header/header2.comp";
+export * from "./header/header.comp";
 export * from "./footer/footer.comp";
 export * from "./sider/sider.comp";
 export * from "./blogCard/blogCard.comp";

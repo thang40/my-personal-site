@@ -2,10 +2,10 @@ import { getBlogList, getBlogDetail } from "../services/hashnode.service";
 import { put, takeLatest } from "redux-saga/effects";
 
 const FETCH_BLOG_LIST_REQUEST = "@@Blog/FETCH_BLOG_LIST_REQUEST";
-const FETCH_BLOG_LIST_COMPLETE = "@@Blog/FETCH_BLOG_LIST_COMPLETE";
+const FETCH_BLOG_LIST_SUCCESS = "@@Blog/FETCH_BLOG_LIST_COMPLETE";
 
 const FETCH_BLOG_DETAILS_REQUEST = "@@Blog/FETCH_BLOG_DETAILS_REQUEST";
-const FETCH_BLOG_DETAILS_COMPLETE = "@@Blog/FETCH_BLOG_DETAILS_COMPLETE";
+const FETCH_BLOG_DETAILS_SUCCESS = "@@Blog/FETCH_BLOG_DETAILS_COMPLETE";
 
 // action creator
 export const fetchBlogListAction = (
@@ -35,14 +35,14 @@ const initialState = {
 
 export const BlogReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_BLOG_LIST_COMPLETE: {
+    case FETCH_BLOG_LIST_SUCCESS: {
       console.log("complete");
       return {
         ...state,
         blogs: [...action.payload]
       };
     }
-    case FETCH_BLOG_DETAILS_COMPLETE: {
+    case FETCH_BLOG_DETAILS_SUCCESS: {
       return {
         ...state,
         blogDetail: action.payload
@@ -69,7 +69,7 @@ function* watchFetchBlogList(action) {
 
     console.log(blogs);
     yield put({
-      type: FETCH_BLOG_LIST_COMPLETE,
+      type: FETCH_BLOG_LIST_SUCCESS,
       payload: blogs
     });
   } catch (error) {
@@ -83,7 +83,7 @@ function* watchFetchBlogDetail(action) {
     const detail = yield getBlogDetail(blogId);
 
     yield put({
-      type: FETCH_BLOG_DETAILS_COMPLETE,
+      type: FETCH_BLOG_DETAILS_SUCCESS,
       payload: detail
     });
 
