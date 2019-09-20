@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, Navbar, Form, FormControl, Button, Image } from "react-bootstrap";
+import { Nav, Navbar, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../consts";
 import logo from "../../assets/logo.svg";
@@ -27,10 +27,6 @@ export const Header = () => {
             <Link to={ROUTES.LOGIN_ROUTE}>Login</Link>
           </span>
         </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-success">Search</Button>
-        </Form>
       </Navbar.Collapse>
     </Navbar>
   );

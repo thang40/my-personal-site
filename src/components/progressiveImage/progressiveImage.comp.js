@@ -9,7 +9,7 @@ export const ProgressiveImage = ({ src }) => {
   const prepImage = () => {
     setTimeout(() => {
       setReady(true);
-    }, 1000);
+    }, 500);
   };
   useEffect(() => {
     const buffer = new Image();

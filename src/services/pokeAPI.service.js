@@ -18,3 +18,13 @@ export const initPokemonName = async () => {
     throw new Error(commonErrorParser(error));
   }
 };
+
+export const getPokemonDetail = async name => {
+  const query = `pokemon/${name}`;
+  try {
+    const res = await hashnodeAxios.get(query);
+    return res.data;
+  } catch (error) {
+    throw new Error(commonErrorParser(error));
+  }
+};
