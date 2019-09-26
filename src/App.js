@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Footer, Header } from "./components";
+import React, { useState, useEffect, useRef } from "react";
+import { Footer, Header, SmallContainer } from "./components";
 import { Provider } from "react-redux";
 import { initStore, initSaga } from "./store";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { ThemeContext, themes } from "./context/theme.context";
+import { ThemeContext, THEMES } from "./context/theme.context";
 import {
   HomeRoute,
   BlogRoute,
@@ -12,20 +12,24 @@ import {
   FunRoute
 } from "./routes";
 import { ROUTES } from "./consts";
-import "./App.css";
+import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const store = initStore();
 initSaga();
 
 const App = () => {
-  const [windowHeight, setWindowHeight] = useState(0);
+  const [minBodyHeight, setWindowHeight] = useState(0);
+  const [theme, setTheme] = useState(THEMES.LIGHT);
+  const headerRef = useRef(null);
+  const footerRef = useRef(null);
   useEffect(() => {
-    setWindowHeight(window.innerHeight);
+    const headerHeight = headerRef.current.clientHeight;
+    const footerHeight = footerRef.current.clientHeight;
+    setWindowHeight(window.innerHeight - headerHeight - footerHeight);
   }, []);
-  const [theme, setTheme] = useState(themes.dark);
   const changeTheme = () => {
-    setTheme(theme === themes.dark ? themes.light : themes.dark);
+    setTheme(theme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK);
   };
 
   return (
@@ -34,8 +38,8 @@ const App = () => {
         <ThemeContext.Provider
           value={{ theme: theme, changeTheme: changeTheme }}
         >
-          <Header />
-          <div style={{ minHeight: windowHeight - 150 }}>
+          <Header theme={theme} ref={headerRef} toggleTheme={changeTheme} />
+          <SmallContainer style={{ minHeight: minBodyHeight }}>
             {/* <Sider style={style} /> */}
             <Route path={ROUTES.HOME_ROUTE} exact component={HomeRoute} />
             <Route path={ROUTES.BLOG_ROUTE} exact component={BlogRoute} />
@@ -45,8 +49,8 @@ const App = () => {
             />
             <Route path={ROUTES.USER_ROUTE} component={UserRoute} />
             <Route path={ROUTES.FUN_ROUTE} component={FunRoute} />
-          </div>
-          <Footer />
+          </SmallContainer>
+          <Footer theme={theme} ref={footerRef} />
         </ThemeContext.Provider>
       </Router>
     </Provider>

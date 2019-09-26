@@ -1,0 +1,28 @@
+$darkBg: #20232a;
+$darkFg: #fff;
+$lightBg: #fefefe;
+$lightFg: #20232a;
+
+@mixin darktheme {
+  background-color: $darkBg;
+  color: $darkFg;
+}
+@mixin lightTheme {
+  background-color: $lightBg;
+  color: $lightFg;
+}
+
+:export {
+  darkBg: #20232a;
+  darkFg: #fff;
+  lightBg: #fefefe;
+  lightFg: #20232a;
+  darktheme: {
+    background-color: $darkBg;
+    color: $darkFg;
+  }
+  lighttheme: {
+    background-color: $lightBg;
+    color: $lightFg;
+  }
+}

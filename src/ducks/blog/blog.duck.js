@@ -1,4 +1,4 @@
-import { getBlogList, getBlogDetail } from "../services/hashnode.service";
+import { getBlogList, getBlogDetail } from "../../services/hashnode.service";
 import { put, takeLatest } from "redux-saga/effects";
 
 const FETCH_BLOG_LIST_REQUEST = "@@Blog/FETCH_BLOG_LIST_REQUEST";

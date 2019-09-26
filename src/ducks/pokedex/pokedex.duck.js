@@ -1,11 +1,14 @@
-import { initPokemonName, getPokemonDetail } from "../services/pokeAPI.service";
+import {
+  initPokemonName,
+  getPokemonDetail
+} from "../../services/pokeAPI.service";
 import { put, takeLatest, select, all, delay } from "redux-saga/effects";
 import Fuse from "fuse.js";
 
 const INIT_POKEMON_NAME_REQUEST = "@@FUN_POKEDEX/INIT_POKEMON_NAME_REQUEST";
 const INIT_POKEMON_NAME_SUCCESS = "@@FUN_POKEDEX/INIT_POKEMON_NAME_SUCCESS";
 const SEARCH_POKEMON_REQUEST = "@@FUN_POKEDEX/SEARCH_POKEMON_REQUEST";
-const SEARCH_POKEMON_SUCCESS = "@@FUN_POKEDEX/SEARCH_POKEMON_SUCCESS";
+// const SEARCH_POKEMON_SUCCESS = "@@FUN_POKEDEX/SEARCH_POKEMON_SUCCESS";
 const INIT_DETAIL_LIST_AND_LISTVIEW =
   "@@FUN_POKEDEX/INIT_DETAIL_LIST_AND_LISTVIEW";
 const FETCH_DETAIL_LIST_AND_LISTVIEW =
@@ -23,10 +26,11 @@ export const searchPokemonAction = searchStr => {
 // reducer
 const initialState = {
   count: undefined,
-  pokemonNames: [],
+  pokemonNames: [], //preload pokemon name list
   page: 1,
-  detailList: [], //preload list
-  detailView: undefined, //detail page view
+  pkmPerPage: 20,
+  detailList: [], //preload pokemon details to get image
+  detailView: undefined, //current detail view
   listView: [] // paginated list
 };
 
@@ -39,11 +43,11 @@ export const FunPokedexReducer = (state = initialState, action) => {
       };
     }
     case INIT_DETAIL_LIST_AND_LISTVIEW: {
-      const { detail } = action.payload;
+      const { details } = action.payload;
       return {
         ...state,
-        detailList: [...state.detailList, detail],
-        listView: [...state.listView, detail]
+        detailList: details,
+        listView: details
       };
     }
     case RESET_LISTVIEW: {
@@ -54,13 +58,15 @@ export const FunPokedexReducer = (state = initialState, action) => {
     }
     case FETCH_DETAIL_LIST_AND_LISTVIEW: {
       const { detailList } = state;
-      const { detail, isAlreadyHaveDetail } = action.payload;
+      const { details, isAlrHaveArr } = action.payload;
+      console.log(isAlrHaveArr);
       return {
         ...state,
-        detailList: isAlreadyHaveDetail
-          ? detailList
-          : [...state.detailList, detail],
-        listView: [...state.listView, detail]
+        detailList: [
+          ...detailList,
+          ...details.filter((d, index) => !isAlrHaveArr[index])
+        ],
+        listView: details
       };
     }
     default: {
@@ -73,11 +79,15 @@ export const FunPokedexReducer = (state = initialState, action) => {
 export const selectPokemonNames = state => state.FunPokedexReducer.pokemonNames;
 export const selectPokemonListView = state => state.FunPokedexReducer.listView;
 export const selectDetailList = state => state.FunPokedexReducer.detailList;
+export const selectPkmPerPage = state => state.FunPokedexReducer.pkmPerPage;
 
 function* watchInitPokemonName(action) {
   try {
     const pokemonNames = yield initPokemonName();
-    const nameList = pokemonNames.slice(0, 20).map(pokemon => pokemon.name);
+    const pkmPerPage = yield select(selectPkmPerPage);
+    const nameList = pokemonNames
+      .slice(0, pkmPerPage)
+      .map(pokemon => pokemon.name);
     yield put({ type: RESET_LISTVIEW });
     yield put({
       type: INIT_POKEMON_NAME_SUCCESS,
@@ -95,6 +105,7 @@ function* watchSearchPokemon(action) {
     const searchStr = action.payload;
     const pokemonNames = yield select(selectPokemonNames);
     const detailList = yield select(selectDetailList);
+    const pkmPerPage = yield select(selectPkmPerPage);
     const fuseOption = {
       shouldSort: true,
       threshold: 0.2,
@@ -108,9 +119,8 @@ function* watchSearchPokemon(action) {
     const result =
       searchStr !== ""
         ? yield fuse.search(searchStr)
-        : pokemonNames.slice(0, 20);
-    const nameList = result.slice(0, 20).map(pokemon => pokemon.name);
-    console.log(searchStr);
+        : pokemonNames.slice(0, pkmPerPage);
+    const nameList = result.slice(0, pkmPerPage).map(pokemon => pokemon.name);
     yield put({ type: RESET_LISTVIEW });
     yield _fetchBulkPokemonDetail(
       nameList,
@@ -127,20 +137,23 @@ function* watchSearchPokemon(action) {
 }
 
 function* _fetchBulkPokemonDetail(nameList, actionType, detailList) {
-  const putArr = yield all(
+  const detailsArr = yield all(
     nameList.map(async name => {
       const index = detailList.findIndex(pokemon => pokemon.name === name);
       const isAlreadyHaveDetail = index !== -1;
       const detail = isAlreadyHaveDetail
         ? detailList[index]
         : await getPokemonDetail(name);
-      return {
-        type: actionType,
-        payload: { detail, isAlreadyHaveDetail }
-      };
+      return { detail, isAlreadyHaveDetail };
     })
   );
-  yield all(putArr.map(item => put(item)));
+  yield put({
+    type: actionType,
+    payload: {
+      details: detailsArr.map(d => d.detail),
+      isAlrHaveArr: detailsArr.map(d => d.isAlreadyHaveDetail)
+    }
+  });
 }
 
 export const FunPokedexSaga = [

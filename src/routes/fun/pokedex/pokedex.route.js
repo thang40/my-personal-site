@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import {
   initPokemonNameAction,
   searchPokemonAction,
   selectPokemonListView
 } from "../../../ducks";
-import { PokemonCard } from "../../../components";
+import { ProgressiveImage } from "../../../components";
 import { PokemonSearchbar } from "./pokemonSearchbar.comp";
+import styles from "./pokedex-route.module.css";
 
 const _FunPokedexRoute = ({ initPokemon, searchPokemon, pokemons }) => {
   useEffect(() => {
@@ -15,12 +16,17 @@ const _FunPokedexRoute = ({ initPokemon, searchPokemon, pokemons }) => {
   }, [initPokemon]);
 
   const renderPokemonCards = () => {
-    return pokemons.map(pokemon => (
-      <PokemonCard
-        key={pokemon.name}
-        name={pokemon.name}
-        imageSrc={pokemon.sprites.front_default}
-      ></PokemonCard>
+    return pokemons.map((pokemon, index) => (
+      <tr>
+        <td>{index + 1}</td>
+        <td>
+          <ProgressiveImage
+            className={styles["pokemon-image"]}
+            src={pokemon.sprites.front_default}
+          />
+        </td>
+        <td>{pokemon.name}</td>
+      </tr>
     ));
   };
   return (
@@ -30,7 +36,20 @@ const _FunPokedexRoute = ({ initPokemon, searchPokemon, pokemons }) => {
           <PokemonSearchbar handleChange={searchPokemon} />
         </Col>
       </Row>
-      <Row>{renderPokemonCards()}</Row>
+      <Row>
+        <Col>
+          <Table size="sm" id={styles["pokemon-table"]} hover responsive>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Image</th>
+                <th>Name</th>
+              </tr>
+            </thead>
+            <tbody>{renderPokemonCards()}</tbody>
+          </Table>
+        </Col>
+      </Row>
     </React.Fragment>
   );
 };

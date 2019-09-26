@@ -12,12 +12,12 @@ export const Sider = ({ style }) => {
 
   return (
     <Nav defaultActiveKey="/home" className="flex-column">
-      <Nav.Link as="div">
+      <Nav.Item as="div">
         <Link to={ROUTES.FUN_POKEDEX_ROUTE}>PokeDex</Link>
-      </Nav.Link>
-      <Nav.Link as="div">
+      </Nav.Item>
+      <Nav.Item as="div">
         <Link to={ROUTES.FUN_AUTH_ROUTE}>Authentication</Link>
-      </Nav.Link>
+      </Nav.Item>
     </Nav>
   );
 };

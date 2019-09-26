@@ -30,7 +30,9 @@ export const initStore = () => {
   sagaMiddleware = createSagaMiddleware();
   return createStore(
     RootReducer,
-    composeEnhancers(applyMiddleware(sagaMiddleware))
+    process.env.NODE_ENV !== "production"
+      ? composeEnhancers(applyMiddleware(sagaMiddleware))
+      : applyMiddleware(sagaMiddleware)
   );
 };
 

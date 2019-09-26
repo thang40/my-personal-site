@@ -4,3 +4,8 @@ export * from "./sider/sider.comp";
 export * from "./blogCard/blogCard.comp";
 export * from "./blogDetail/blogDetail.comp";
 export * from "./pokemonCard/pokemonCard.comp";
+export * from "./progressiveImage/progressiveImage.comp";
+export * from "./errorBoundary/errorBoundary.comp";
+export * from "./smallContainer/smallContainer.comp";
+export * from "./profileCard/profileCard.comp";
+export * from "./introHero/introHero.comp";

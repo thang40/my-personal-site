@@ -1,5 +1,5 @@
 import { put, takeLatest } from "redux-saga/effects";
-import { clearAuthData } from "../services/auth.service";
+import { clearAuthData } from "../../services/auth.service";
 
 const LOGIN_REQUEST = "@@Auth/LOGIN_REQUEST";
 const LOGOUT_REQUEST = "@@Auth/LOGOUT_REQUEST";

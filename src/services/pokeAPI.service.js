@@ -1,5 +1,5 @@
 import axios from "axios";
-import { commonErrorParser } from "../utils/error-handler.util";
+import { commonErrorParser } from "../utils/errorHandler.util";
 
 const hashnodeAxios = axios.create({
   baseURL: "https://pokeapi.co/api/v2/",

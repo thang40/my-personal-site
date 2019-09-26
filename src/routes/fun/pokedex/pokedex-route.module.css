@@ -1,0 +1,7 @@
+#pokemon-table td {
+  vertical-align: middle;
+}
+
+#pokemon-table .pokemon-image {
+  height: 40px;
+}
