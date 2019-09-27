@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap";
-import { fetchBlogDetailAction, selectBlogDetail } from "../../ducks";
-import { BlogDetail } from "../../components";
+import { fetchBlogDetailAction, selectBlogDetail } from "../../../ducks";
+import { BlogDetail } from "../../../components";
 
 const _BlogDetailRoute = ({ fetchBlogDetail, blogDetail, match, history }) => {
   const [loading, setLoading] = useState(true);

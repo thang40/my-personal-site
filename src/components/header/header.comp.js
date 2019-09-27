@@ -12,7 +12,7 @@ import logo from "../../assets/logo.svg";
 export const Header = React.forwardRef(({ theme, toggleTheme }, ref) => {
   return (
     <header id={styles["header"]} ref={ref} className={styles[theme]}>
-      <Navbar expand="lg" id={styles["navbar"]}>
+      <Navbar expand="lg" id={styles["header-nav"]}>
         <Navbar.Brand href="/">
           <Image style={{ height: "60px" }} src={logo} />
           {/* <Spinner animation="border" /> */}
@@ -67,7 +67,7 @@ export const Header = React.forwardRef(({ theme, toggleTheme }, ref) => {
               </NavLink>
             </span>
           </Nav>
-          <Nav className="justify-content-end" activeKey="/home">
+          <Nav className="justify-content-end">
             <Nav.Item>
               <Button
                 variant={
@@ -79,6 +79,15 @@ export const Header = React.forwardRef(({ theme, toggleTheme }, ref) => {
                   icon={theme === THEMES.DARK ? faMoon : faSun}
                   color={theme === THEMES.DARK ? "#f5f3ce" : "#FDB813"}
                 />
+              </Button>
+            </Nav.Item>
+            <Nav.Item>
+              <Button
+                variant={
+                  theme === THEMES.DARK ? "outline-light" : "outline-dark"
+                }
+              >
+                <div>EN</div>
               </Button>
             </Nav.Item>
           </Nav>

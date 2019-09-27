@@ -6,8 +6,7 @@ import {
   searchPokemonAction,
   selectPokemonListView
 } from "../../../ducks";
-import { ItemBar } from "../../../components";
-import { PokemonSearchbar } from "./pokemonSearchbar.comp";
+import { ItemBar, SearchBar } from "../../../components";
 // import styles from "./pokedex-route.module.css";
 
 const _FunPokedexRoute = ({ initPokemon, searchPokemon, pokemons }) => {
@@ -28,7 +27,7 @@ const _FunPokedexRoute = ({ initPokemon, searchPokemon, pokemons }) => {
     <React.Fragment>
       <Row>
         <Col>
-          <PokemonSearchbar handleChange={searchPokemon} />
+          <SearchBar handleChange={searchPokemon} />
         </Col>
       </Row>
       <Row>

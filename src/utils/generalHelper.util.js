@@ -5,3 +5,11 @@ export const upperCase1stChar = str => {
   }
   return str[0].toUpperCase() + (length > 1 ? str.slice(1) : "");
 };
+
+const vietnameseTranslate = {
+  Hello: "Chào"
+};
+
+export const translate = (language, message) => {
+  return vietnameseTranslate[message];
+};

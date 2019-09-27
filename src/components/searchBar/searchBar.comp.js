@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import styles from "./pokemonSearchbar-comp.module.css";
+import styles from "./searchBar-comp.module.css";
 
-export const PokemonSearchbar = ({ handleChange }) => {
+export const SearchBar = ({ handleChange }) => {
   const [searchStr, setSearchStr] = useState("");
   return (
     <Form.Control

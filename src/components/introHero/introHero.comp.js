@@ -15,8 +15,9 @@ export const IntroHero = () => {
         Hello, <FontAwesomeIcon icon={faGlobeAsia} color="blue" /> !
       </h1>
       <p>
-        Techs I love <FontAwesomeIcon icon={faChevronRight} color="blue" />{" "}
-        ReactJS <FontAwesomeIcon icon={faReact} color="blue" spin />, Javascript{" "}
+        I build things with{" "}
+        <FontAwesomeIcon icon={faChevronRight} color="blue" /> ReactJS{" "}
+        <FontAwesomeIcon icon={faReact} color="blue" spin />, Javascript{" "}
         <FontAwesomeIcon icon={faJs} color="green" />
       </p>
       <p>
