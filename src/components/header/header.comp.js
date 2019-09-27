@@ -69,17 +69,17 @@ export const Header = React.forwardRef(({ theme, toggleTheme }, ref) => {
           </Nav>
           <Nav className="justify-content-end">
             <Nav.Item>
-              <Button
-                variant={
-                  theme === THEMES.DARK ? "outline-light" : "outline-dark"
-                }
+              <span
+                id={styles["theme-btn"]}
+                className="nav-link"
                 onClick={toggleTheme}
               >
                 <FontAwesomeIcon
+                  size="lg"
                   icon={theme === THEMES.DARK ? faMoon : faSun}
                   color={theme === THEMES.DARK ? "#f5f3ce" : "#FDB813"}
                 />
-              </Button>
+              </span>
             </Nav.Item>
             <Nav.Item>
               <Button
