@@ -11,7 +11,7 @@ export const SmallContainer = ({ children, ...rest }) => {
 };
 
 SmallContainer.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.array
 };
 
 SmallContainer.defaultProps = {};

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { Card, Button, OverlayTrigger, Tooltip, place } from "react-bootstrap";
+import React from "react";
+import { Card, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { ProgressiveImage } from "../progressiveImage/progressiveImage.comp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,9 +10,6 @@ import {
 import styles from "./profileCard-comp.module.scss";
 
 export const ProfileCard = () => {
-  const [show, setShow] = useState(false);
-  const target = useRef(null);
-
   return (
     <Card id={styles["profile-card"]}>
       <Card.Img
@@ -32,11 +29,7 @@ export const ProfileCard = () => {
               </Tooltip>
             }
           >
-            <FontAwesomeIcon
-              icon={faQuestionCircle}
-              color="red"
-              onClick={() => setShow(!show)}
-            />
+            <FontAwesomeIcon icon={faQuestionCircle} color="red" />
           </OverlayTrigger>
         </Card.Title>
         <Card.Text>

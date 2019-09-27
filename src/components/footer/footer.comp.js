@@ -39,7 +39,7 @@ export const Footer = React.forwardRef(({ theme }, ref) => {
 });
 
 Footer.propTypes = {
-  theme: PropTypes.oneOf(THEMES.DARK, THEMES.LIGHT)
+  theme: PropTypes.oneOf([THEMES.DARK, THEMES.LIGHT])
 };
 
 Footer.defaultProps = {

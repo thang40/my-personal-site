@@ -9,3 +9,4 @@ export * from "./errorBoundary/errorBoundary.comp";
 export * from "./smallContainer/smallContainer.comp";
 export * from "./profileCard/profileCard.comp";
 export * from "./introHero/introHero.comp";
+export * from "./itemBar/itemBar.comp";

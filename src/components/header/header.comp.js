@@ -89,7 +89,7 @@ export const Header = React.forwardRef(({ theme, toggleTheme }, ref) => {
 });
 
 Header.propTypes = {
-  theme: PropTypes.oneOf(THEMES.DARK, THEMES.LIGHT)
+  theme: PropTypes.oneOf([THEMES.DARK, THEMES.LIGHT])
 };
 
 Header.defaultProps = {

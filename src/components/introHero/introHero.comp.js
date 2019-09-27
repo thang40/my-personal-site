@@ -1,23 +1,16 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGlobeAsia,
-  fajs,
-  faChevronRight
-} from "@fortawesome/free-solid-svg-icons";
+import { faGlobeAsia, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import {
   faReact,
   faJs,
-  faCss3,
-  faHtml5,
   faStackOverflow,
-  faGithub,
   faDev
 } from "@fortawesome/free-brands-svg-icons";
 
 export const IntroHero = () => {
   return (
-    <div>
+    <aside>
       <h1>
         Hello, <FontAwesomeIcon icon={faGlobeAsia} color="blue" /> !
       </h1>
@@ -36,6 +29,6 @@ export const IntroHero = () => {
         <a href="https://dev.to/thang40">Dev.to</a>{" "}
         <FontAwesomeIcon icon={faDev} color="green" />
       </p>
-    </div>
+    </aside>
   );
 };
