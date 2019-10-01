@@ -14,6 +14,7 @@ const _BlogDetailRoute = ({ fetchBlogDetail, blogDetail, match, history }) => {
       history.replace("/");
     };
     const blogId = match.params.id;
+    setLoading(true);
     fetchBlogDetail(blogId, handleGetDetailSuccess, handleGetDetailError);
   }, [fetchBlogDetail, match.params.id, history]);
 
@@ -33,20 +34,9 @@ const _BlogDetailRoute = ({ fetchBlogDetail, blogDetail, match, history }) => {
   };
 
   return (
-    <React.Fragment>
-      <div
-        style={{
-          background: "#fff",
-          padding: 24,
-          margin: 0,
-          minHeight: 280
-        }}
-      >
-        <Row>
-          <Col>{renderBlogDetail()}</Col>
-        </Row>
-      </div>
-    </React.Fragment>
+    <Row>
+      <Col>{renderBlogDetail()}</Col>
+    </Row>
   );
 };
 

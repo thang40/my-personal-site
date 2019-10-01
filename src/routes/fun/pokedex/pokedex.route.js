@@ -26,12 +26,10 @@ const _FunPokedexRoute = ({ initPokemon, searchPokemon, pokemons }) => {
   return (
     <React.Fragment>
       <Row>
-        <Col>
+        <Col lg={12}>
           <SearchBar handleChange={searchPokemon} />
         </Col>
-      </Row>
-      <Row>
-        <Col>{renderPokemonCards()}</Col>
+        <Col lg={12}>{renderPokemonCards()}</Col>
       </Row>
     </React.Fragment>
   );

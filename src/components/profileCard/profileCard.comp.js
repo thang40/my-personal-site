@@ -7,11 +7,13 @@ import {
   faQuestionCircle,
   faChevronLeft
 } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from "prop-types";
+import { THEMES } from "../../context/theme.context";
 import styles from "./profileCard-comp.module.scss";
 
-export const ProfileCard = () => {
+export const ProfileCard = ({ theme }) => {
   return (
-    <Card id={styles["profile-card"]}>
+    <Card id={styles["profile-card"]} className={styles[theme]}>
       <Card.Img
         as={ProgressiveImage}
         variant="top"
@@ -44,4 +46,12 @@ export const ProfileCard = () => {
       </Card.Body>
     </Card>
   );
+};
+
+ProfileCard.propTypes = {
+  theme: PropTypes.oneOf([THEMES.DARK, THEMES.LIGHT])
+};
+
+ProfileCard.defaultProps = {
+  theme: THEMES.LIGHT
 };

@@ -5,8 +5,6 @@ import { initStore, initSaga } from "./store";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ThemeContext, THEMES } from "./context/theme.context";
 import { ROUTES } from "./consts";
-import "./App.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const FunRoute = React.lazy(() => import("./routes/fun/fun.route"));
 const HomeRoute = React.lazy(() => import("./routes/home/home.route"));
@@ -39,7 +37,7 @@ const App = () => {
           value={{ theme: theme, changeTheme: changeTheme }}
         >
           <Header theme={theme} ref={headerRef} toggleTheme={changeTheme} />
-          <SmallContainer style={{ minHeight: minBodyHeight }}>
+          <SmallContainer theme={theme} style={{ minHeight: minBodyHeight }}>
             <Suspense fallback={<div>...loading</div>}>
               {/* <Sider style={style} /> */}
               <Route path={ROUTES.HOME_ROUTE} exact component={HomeRoute} />

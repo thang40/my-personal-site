@@ -4,11 +4,16 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../consts";
 import { ProgressiveImage } from "../progressiveImage/progressiveImage.comp";
-import styles from "./blogCard-comp.module.css";
+import styles from "./blogCard-comp.module.scss";
 
-export const BlogCard = ({ title, cuid, coverImage, loading }) => {
+export const BlogCard = ({ title, cuid, coverImage, loading, theme }) => {
+  console.log(theme);
   return (
-    <Link className={styles["blog-card"]} to={`${ROUTES.BLOG_ROUTE}/${cuid}`}>
+    <Link
+      id={styles["blog-card"]}
+      className={styles[theme]}
+      to={`${ROUTES.BLOG_ROUTE}/${cuid}`}
+    >
       <Card>
         <Card.Img as="div">
           <ProgressiveImage src={coverImage} fluid={true} />

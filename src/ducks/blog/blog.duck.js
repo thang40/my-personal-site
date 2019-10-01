@@ -72,11 +72,11 @@ export const selectBlogDetail = state => state.BlogReducer.blogDetail;
 
 // side effect
 function* watchFetchBlogList(action) {
-  while (yield take(FETCH_BLOG_LIST_REQUEST)) {
+  while (true) {
     const { handleNoDataFromComp, handleErrorFromComp } = yield take(
       FETCH_BLOG_LIST_REQUEST
     ).payload;
-    const fetchTask = yield fork(function* fetchBlogList() {
+    const fetchTask = yield fork(function*() {
       try {
         const blogs = yield getBlogList();
         if (blogs.length === 0) {

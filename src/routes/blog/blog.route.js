@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { connect } from "react-redux";
 import {
   fetchBlogListAction,
@@ -7,6 +7,7 @@ import {
 } from "../../ducks";
 import { Row, Col } from "react-bootstrap";
 import { BlogCard } from "../../components";
+import { ThemeContext } from "../../context/theme.context";
 
 const _BlogRoute = ({
   fetchBlogList,
@@ -16,7 +17,7 @@ const _BlogRoute = ({
   ...rest
 }) => {
   const [hasData, setHasData] = useState(true);
-
+  const { theme } = useContext(ThemeContext);
   useEffect(() => {
     const handleIfNoData = () => {
       setHasData(false);
@@ -34,7 +35,7 @@ const _BlogRoute = ({
     if (hasData) {
       return blogs.map((blog, index) => (
         <Col lg={4} md={4} sm={4} key={index}>
-          <BlogCard {...blog} loading={false} />
+          <BlogCard {...blog} loading={false} theme={theme} />
         </Col>
       ));
     } else {
@@ -42,20 +43,7 @@ const _BlogRoute = ({
     }
   };
 
-  return (
-    <React.Fragment>
-      <div
-        style={{
-          background: "#fff",
-          padding: "1rem 0",
-          margin: 0,
-          minHeight: 280
-        }}
-      >
-        <Row>{renderBlogList()}</Row>
-      </div>
-    </React.Fragment>
-  );
+  return <Row>{renderBlogList()}</Row>;
 };
 
 export const BlogRoute = connect(

@@ -1,0 +1,16 @@
+@import "../../assets/globalStyles/global.scss";
+
+#blog-card,
+#blog-card:hover,
+#blog-card:focus {
+  text-decoration: none;
+  color: #212529;
+}
+
+.dark {
+  @include darkTheme;
+}
+
+.light {
+  @include lightTheme;
+}

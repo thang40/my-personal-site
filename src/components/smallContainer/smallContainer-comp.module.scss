@@ -1,6 +1,17 @@
+@import "../../assets/globalStyles/global.scss";
+
 #small-container {
   padding: 3rem 1rem;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.dark {
+  background-color: rgba($darkBg, 0.9);
+  color: $darkFg;
+}
+
+.light {
+  color: $lightFg;
 }

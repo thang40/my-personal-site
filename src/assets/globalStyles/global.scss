@@ -3,7 +3,7 @@ $darkFg: #fff;
 $lightBg: #fefefe;
 $lightFg: #20232a;
 
-@mixin darktheme {
+@mixin darkTheme {
   background-color: $darkBg;
   color: $darkFg;
 }

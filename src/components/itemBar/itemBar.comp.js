@@ -7,15 +7,17 @@ import styles from "./itemBar-comp.module.scss";
 
 export const ItemBar = ({ imageSrc, title, createdDate }) => {
   return (
-    <Row id={styles["item-bar"]} className="align-items-center">
-      <Col lg="2">
-        <ProgressiveImage src={imageSrc} fluid={true} />
-      </Col>
-      <Col lg="10">
-        <h6>{upperCase1stChar(title)}</h6>
-        <p className={styles["date-time"]}>{createdDate}</p>
-      </Col>
-    </Row>
+    <div id={styles["item-bar"]}>
+      <Row className="align-items-center">
+        <Col lg="2">
+          <ProgressiveImage src={imageSrc} fluid={true} />
+        </Col>
+        <Col lg="10">
+          <h6>{upperCase1stChar(title)}</h6>
+          <p className={styles["date-time"]}>{createdDate}</p>
+        </Col>
+      </Row>
+    </div>
   );
 };
 
