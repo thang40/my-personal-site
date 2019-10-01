@@ -1,6 +1,7 @@
 {
   "name": "siegen-page",
   "version": "0.1.0",
+  "main": "app.js",
   "private": false,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
@@ -38,8 +39,8 @@
     "postinstall": "react-scripts build"
   },
   "engines": {
-    "node": "~6.10.3",
-    "npm": "~5.6.0"
+    "node": "~12.1.0",
+    "npm": "~6.9.0"
   },
   "eslintConfig": {
     "extends": "react-app"
