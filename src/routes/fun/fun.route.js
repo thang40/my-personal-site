@@ -6,6 +6,7 @@ import { Row, Col } from "react-bootstrap";
 import { FunAuthRoute } from "./authen/authen.route";
 import { FunPokedexRoute } from "./pokedex/pokedex.route";
 import styles from "./fun-route.module.css";
+
 export const FunRoute = () => {
   return (
     <Row>
@@ -21,3 +22,5 @@ export const FunRoute = () => {
     </Row>
   );
 };
+
+export default FunRoute;

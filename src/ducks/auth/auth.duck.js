@@ -1,4 +1,4 @@
-import { put, takeLatest } from "redux-saga/effects";
+import { put, takeLatest, fork } from "redux-saga/effects";
 import { clearAuthData } from "../../services/auth.service";
 
 const LOGIN_REQUEST = "@@Auth/LOGIN_REQUEST";
@@ -100,7 +100,7 @@ function* watchLogout(action) {
   });
 }
 
-export function* initUserData() {
+function* initUserData() {
   const userData = JSON.parse(localStorage.getItem("auth"));
   if (userData) {
     yield put({
@@ -112,5 +112,6 @@ export function* initUserData() {
 
 export const AuthSaga = [
   takeLatest(LOGIN_REQUEST, watchLogin),
-  takeLatest(LOGOUT_REQUEST, watchLogout)
+  takeLatest(LOGOUT_REQUEST, watchLogout),
+  fork(initUserData)
 ];

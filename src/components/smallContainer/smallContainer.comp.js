@@ -11,7 +11,7 @@ export const SmallContainer = ({ children, ...rest }) => {
 };
 
 SmallContainer.propTypes = {
-  children: PropTypes.array
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 };
 
 SmallContainer.defaultProps = {};

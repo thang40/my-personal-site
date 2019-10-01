@@ -16,3 +16,5 @@ export const HomeRoute = () => {
     </React.Fragment>
   );
 };
+
+export default HomeRoute;

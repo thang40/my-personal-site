@@ -7,10 +7,9 @@ import {
   FunPokedexReducer,
   AuthSaga,
   BlogSaga,
-  FunPokedexSaga,
-  initUserData
+  FunPokedexSaga
 } from "./ducks";
-import { all, fork } from "redux-saga/effects";
+import { all } from "redux-saga/effects";
 
 const RootReducer = combineReducers({
   BlogReducer,
@@ -21,7 +20,7 @@ const RootReducer = combineReducers({
 let sagaMiddleware;
 
 function* rootSaga() {
-  yield all([...AuthSaga, ...BlogSaga, ...FunPokedexSaga, fork(initUserData)]);
+  yield all([...AuthSaga, ...BlogSaga, ...FunPokedexSaga]);
 }
 export const initStore = () => {
   const composeEnhancers =

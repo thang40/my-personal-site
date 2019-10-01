@@ -10,33 +10,36 @@ export const ProgressiveImage = ({ src, delay, fluid, ...rest }) => {
     getImgPlaceHolder(350, 200, "loading")
   );
   useEffect(() => {
-    _setLazyLoading(imgRef.current, delay);
-  });
-
-  const _setLazyLoading = (Element, delayFlashing) => {
-    let buffer = new Image();
-    buffer.onload = () =>
-      setTimeout(() => {
-        setInternalSrc(src);
-      }, delayFlashing);
-
-    buffer.onerror = () => setInternalSrc(img404);
-
-    if ("IntersectionObserver" in window) {
-      let lazyImageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            buffer.src = src;
-            lazyImageObserver.unobserve(Element);
+    const _setLazyLoading = (Element, delayFlashing) => {
+      let buffer = new Image();
+      buffer.onload = () => {
+        setTimeout(() => {
+          if (imgRef.current) {
+            setInternalSrc(src);
           }
-        });
-      });
+        }, delayFlashing);
+      };
+      buffer.onerror = () => setInternalSrc(img404);
 
-      lazyImageObserver.observe(Element);
-    } else {
-      // Possibly fall back to a more compatible method here
-    }
-  };
+      if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                buffer.src = src;
+                lazyImageObserver.unobserve(Element);
+              }
+            });
+          }
+        );
+
+        lazyImageObserver.observe(Element);
+      } else {
+        // Possibly fall back to a more compatible method here
+      }
+    };
+    _setLazyLoading(imgRef.current, delay);
+  }, [delay, src]);
 
   return (
     <img
@@ -44,7 +47,9 @@ export const ProgressiveImage = ({ src, delay, fluid, ...rest }) => {
       src={internalSrc}
       ref={imgRef}
       alt={rest.alt}
-      className={`${rest.className} ${fluid ? styles["fluid-img"] : ""}`}
+      className={`${rest.className === "undefined" ? "" : rest.className} ${
+        fluid ? styles["fluid-img"] : ""
+      }`}
     />
   );
 };

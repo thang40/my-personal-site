@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { fetchBlogListAction, selectBlogList } from "../../ducks";
+import {
+  fetchBlogListAction,
+  cancelFetchBlogListAction,
+  selectBlogList
+} from "../../ducks";
 import { Row, Col } from "react-bootstrap";
 import { BlogCard } from "../../components";
 
-const _BlogRoute = ({ fetchBlogList, blogs, history, ...rest }) => {
+const _BlogRoute = ({
+  fetchBlogList,
+  cancelFetchBlogList,
+  blogs,
+  history,
+  ...rest
+}) => {
   const [hasData, setHasData] = useState(true);
 
   useEffect(() => {
@@ -15,7 +25,10 @@ const _BlogRoute = ({ fetchBlogList, blogs, history, ...rest }) => {
       history.push("/");
     };
     fetchBlogList(handleIfNoData, handleGetListError);
-  }, [history, fetchBlogList]);
+    return () => {
+      cancelFetchBlogList();
+    };
+  }, [history, fetchBlogList, cancelFetchBlogList]);
 
   const renderBlogList = () => {
     if (hasData) {
@@ -49,5 +62,10 @@ export const BlogRoute = connect(
   state => ({
     blogs: selectBlogList(state)
   }),
-  { fetchBlogList: fetchBlogListAction }
+  {
+    fetchBlogList: fetchBlogListAction,
+    cancelFetchBlogList: cancelFetchBlogListAction
+  }
 )(_BlogRoute);
+
+export default BlogRoute;

@@ -15,7 +15,6 @@ export const Header = React.forwardRef(({ theme, toggleTheme }, ref) => {
       <Navbar expand="lg" id={styles["header-nav"]}>
         <Navbar.Brand href="/">
           <Image style={{ height: "60px" }} src={logo} />
-          {/* <Spinner animation="border" /> */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

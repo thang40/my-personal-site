@@ -56,3 +56,5 @@ export const BlogDetailRoute = connect(
   }),
   { fetchBlogDetail: fetchBlogDetailAction }
 )(_BlogDetailRoute);
+
+export default BlogDetailRoute;

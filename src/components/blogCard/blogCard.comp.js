@@ -10,7 +10,7 @@ export const BlogCard = ({ title, cuid, coverImage, loading }) => {
   return (
     <Link className={styles["blog-card"]} to={`${ROUTES.BLOG_ROUTE}/${cuid}`}>
       <Card>
-        <Card.Img as="div" fluid>
+        <Card.Img as="div">
           <ProgressiveImage src={coverImage} fluid={true} />
         </Card.Img>
         <Card.Body>
