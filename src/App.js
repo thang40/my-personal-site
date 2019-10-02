@@ -12,7 +12,8 @@ const BlogRoute = React.lazy(() => import("./routes/blog/blog.route"));
 const BlogDetailRoute = React.lazy(() =>
   import("./routes/blog/blogDetail/blogDetail.route")
 );
-
+const baseName =
+  process.env.NODE_ENV === "production" ? "/my-personal-site" : "/";
 const store = initStore();
 initSaga();
 
@@ -32,7 +33,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Router>
+      <Router basename={baseName}>
         <ThemeContext.Provider
           value={{ theme: theme, changeTheme: changeTheme }}
         >

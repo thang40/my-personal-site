@@ -1,6 +1,6 @@
 export const HOME_ROUTE = "/";
 export const BLOG_ROUTE = "/blogs";
-export const BLOG_DETAIL_ROUTE = "/blogs/:id";
+export const BLOG_DETAIL_ROUTE = "/blogs/:slugId";
 export const USER_ROUTE = "/user";
 export const LOGIN_ROUTE = "/login";
 export const FUN_ROUTE = "/fun";

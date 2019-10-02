@@ -6,13 +6,13 @@ import { ROUTES } from "../../consts";
 import { ProgressiveImage } from "../progressiveImage/progressiveImage.comp";
 import styles from "./blogCard-comp.module.scss";
 
-export const BlogCard = ({ title, cuid, coverImage, loading, theme }) => {
+export const BlogCard = ({ title, cuid, coverImage, slug, loading, theme }) => {
   console.log(theme);
   return (
     <Link
       id={styles["blog-card"]}
       className={styles[theme]}
-      to={`${ROUTES.BLOG_ROUTE}/${cuid}`}
+      to={`${ROUTES.BLOG_ROUTE}/${slug + "-" + cuid}`}
     >
       <Card>
         <Card.Img as="div">

@@ -13,7 +13,8 @@ const _BlogDetailRoute = ({ fetchBlogDetail, blogDetail, match, history }) => {
     const handleGetDetailError = () => {
       history.replace("/");
     };
-    const blogId = match.params.id;
+    const slugId = match.params.slugId;
+    const blogId = slugId.split("-").reverse()[0];
     setLoading(true);
     fetchBlogDetail(blogId, handleGetDetailSuccess, handleGetDetailError);
   }, [fetchBlogDetail, match.params.id, history]);
