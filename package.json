@@ -2,6 +2,7 @@
   "name": "siegen-page",
   "version": "0.1.0",
   "main": "app.js",
+  "homepage": "https://thang40.github.io/my-personal-site/",
   "private": false,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
@@ -14,6 +15,7 @@
     "express": "^4.17.1",
     "formik": "^1.5.8",
     "fuse.js": "^3.4.5",
+    "gh-pages": "^2.1.1",
     "my-react-spring-comp-lib": "^1.0.44",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
@@ -36,7 +38,9 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "postinstall": "react-scripts build"
+    "postinstall": "react-scripts build",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "engines": {
     "node": "~12.1.0",
