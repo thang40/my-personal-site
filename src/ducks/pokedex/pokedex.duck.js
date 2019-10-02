@@ -59,7 +59,6 @@ export const FunPokedexReducer = (state = initialState, action) => {
     case FETCH_DETAIL_LIST_AND_LISTVIEW: {
       const { detailList } = state;
       const { details, isAlrHaveArr } = action.payload;
-      console.log(isAlrHaveArr);
       return {
         ...state,
         detailList: [

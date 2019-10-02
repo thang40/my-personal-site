@@ -88,7 +88,6 @@ function* watchFetchBlogList(action) {
           payload: blogs
         });
       } catch (error) {
-        console.log("error");
         handleErrorFromComp();
       } finally {
         if (yield cancelled()) {

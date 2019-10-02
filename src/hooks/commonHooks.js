@@ -22,7 +22,6 @@ export const useAuthStatus = authStatus => {
 export const useRightStatus = roles => {
   const [hasRight, setHasRight] = useState(false);
   const userRoles = useSelector(selectUserRoles);
-  console.log(userRoles);
   useEffect(() => {
     setHasRight(userRoles.some(r => roles.includes(r)));
     return () => {

@@ -7,7 +7,6 @@ import { ProgressiveImage } from "../progressiveImage/progressiveImage.comp";
 import styles from "./blogCard-comp.module.scss";
 
 export const BlogCard = ({ title, cuid, coverImage, slug, loading, theme }) => {
-  console.log(theme);
   return (
     <Link
       id={styles["blog-card"]}
