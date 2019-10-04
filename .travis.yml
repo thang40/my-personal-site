@@ -7,11 +7,11 @@ cache:
 before_install:
   - echo -e "machine github.com\n  login thang40\n  password $my_github_password"
 script:
-  - yarn deploy
+  - yarn build
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $github_key
   local_dir: build
   on:
-    branch: gh_pages
+    branch: master
