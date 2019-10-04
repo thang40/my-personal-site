@@ -18,20 +18,28 @@ const RootReducer = combineReducers({
   FunPokedexReducer
 });
 let sagaMiddleware;
+const isProd = process.env.NODE_ENV === "production";
 
 function* rootSaga() {
   yield all([...AuthSaga, ...BlogSaga, ...FunPokedexSaga]);
 }
-export const initStore = () => {
+export const initStore = handleSagaError => {
   const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-  sagaMiddleware = createSagaMiddleware();
+  sagaMiddleware = createSagaMiddleware({
+    onError: error => {
+      if (isProd) {
+        console.log(error);
+      }
+      handleSagaError();
+    }
+  });
   return createStore(
     RootReducer,
-    process.env.NODE_ENV !== "production"
-      ? composeEnhancers(applyMiddleware(sagaMiddleware))
-      : applyMiddleware(sagaMiddleware)
+    isProd
+      ? applyMiddleware(sagaMiddleware)
+      : composeEnhancers(applyMiddleware(sagaMiddleware))
   );
 };
 

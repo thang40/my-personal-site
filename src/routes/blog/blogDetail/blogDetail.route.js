@@ -17,7 +17,7 @@ const _BlogDetailRoute = ({ fetchBlogDetail, blogDetail, match, history }) => {
     const blogId = slugId.split("-").reverse()[0];
     setLoading(true);
     fetchBlogDetail(blogId, handleGetDetailSuccess, handleGetDetailError);
-  }, [fetchBlogDetail, match.params.id, history]);
+  }, [fetchBlogDetail, match.params.slugId, history]);
 
   const renderBlogDetail = () => {
     if (loading) {

@@ -36,6 +36,7 @@ export const ProgressiveImage = ({ src, delay, fluid, ...rest }) => {
         lazyImageObserver.observe(Element);
       } else {
         // Possibly fall back to a more compatible method here
+        buffer.src = src;
       }
     };
     _setLazyLoading(imgRef.current, delay);
