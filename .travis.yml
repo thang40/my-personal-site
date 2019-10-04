@@ -4,6 +4,8 @@ node_js:
 cache:
   directories:
     - node_modules
+before_install:
+  - echo -e "machine github.com\n  login thang40\n  password $my_github_password"
 script:
   - yarn deploy
 deploy:
