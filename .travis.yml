@@ -8,7 +8,8 @@ script:
   - yarn deploy
 deploy:
   provider: pages
-  github_token: 75fda100758cceb27f95c22a2becab8905dd7f2b
+  skip_cleanup: true
+  github_token: $github_key
   local_dir: build
   on:
     branch: gh_pages

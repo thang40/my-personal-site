@@ -15,7 +15,6 @@
     "express": "^4.17.1",
     "formik": "^1.5.8",
     "fuse.js": "^3.4.5",
-    "gh-pages": "^2.1.1",
     "my-react-spring-comp-lib": "^1.0.44",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
@@ -40,7 +39,7 @@
     "build-storybook": "build-storybook -s public",
     "postinstall": "react-scripts build",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages --help"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -67,6 +66,7 @@
     "css-loader": "^3.2.0",
     "less": "^3.10.1",
     "less-loader": "^5.0.0",
-    "style-loader": "^1.0.0"
+    "style-loader": "^1.0.0",
+    "gh-pages": "^2.1.1"
   }
 }
