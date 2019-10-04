@@ -39,7 +39,7 @@
     "build-storybook": "build-storybook -s public",
     "postinstall": "react-scripts build",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages --help"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
