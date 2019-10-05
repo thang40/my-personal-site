@@ -1,5 +1,5 @@
 import axios from "axios";
-import { commonErrorParser } from "../utils/errorHandler.util";
+import { axiosErrorHandler } from "../utils/errorHandler.utils";
 
 const hashnodeAxios = axios.create({
   baseURL: "https://pokeapi.co/api/v2/",
@@ -9,13 +9,13 @@ const hashnodeAxios = axios.create({
   }
 });
 
-export const initPokemonName = async () => {
+export const getAllPokemonName = async () => {
   const query = "pokemon?limit=1000";
   try {
     const res = await hashnodeAxios.get(query);
     return res.data.results;
   } catch (error) {
-    throw new Error(commonErrorParser(error));
+    axiosErrorHandler(error);
   }
 };
 
@@ -25,6 +25,6 @@ export const getPokemonDetail = async name => {
     const res = await hashnodeAxios.get(query);
     return res.data;
   } catch (error) {
-    throw new Error(commonErrorParser(error));
+    axiosErrorHandler(error);
   }
 };

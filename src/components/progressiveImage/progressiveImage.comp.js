@@ -7,7 +7,7 @@ import { getImgPlaceHolder } from "../../services/imgPlaceholder.service";
 export const ProgressiveImage = ({ src, delay, fluid, ...rest }) => {
   const imgRef = useRef(null);
   const [internalSrc, setInternalSrc] = useState(
-    getImgPlaceHolder(350, 200, "loading")
+    getImgPlaceHolder(450, 200, "loading")
   );
   useEffect(() => {
     const _setLazyLoading = (Element, delayFlashing) => {

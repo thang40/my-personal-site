@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
 import { Row, Col } from "react-bootstrap";
-import { fetchBlogDetailAction, selectBlogDetail } from "../../../ducks";
-import { BlogDetail } from "../../../components";
+import { BlogDetail, LoadingSpinner } from "../../../components";
+import { getBlogDetail } from "../../../services/hashnode.service";
 
-const _BlogDetailRoute = ({ fetchBlogDetail, blogDetail, match, history }) => {
+const BlogDetailRoute = ({ match }) => {
   const [loading, setLoading] = useState(true);
-  const handleGetDetailSuccess = () => {
-    setLoading(false);
-  };
+  const [blogDetail, setBlogDetail] = useState(undefined);
   useEffect(() => {
-    const handleGetDetailError = () => {
-      history.replace("/");
+    const getBlogDetailWrapper = async () => {
+      const slugId = match.params.slugId;
+      const blogId = slugId.split("-").reverse()[0];
+      setLoading(true);
+      setBlogDetail(await getBlogDetail(blogId));
+      setLoading(false);
     };
-    const slugId = match.params.slugId;
-    const blogId = slugId.split("-").reverse()[0];
-    setLoading(true);
-    fetchBlogDetail(blogId, handleGetDetailSuccess, handleGetDetailError);
-  }, [fetchBlogDetail, match.params.slugId, history]);
+    getBlogDetailWrapper();
+  }, [match.params.slugId]);
 
   const renderBlogDetail = () => {
     if (loading) {
-      return <React.Fragment></React.Fragment>;
+      return (
+        <div className="text-center">
+          <LoadingSpinner />
+        </div>
+      );
     } else {
       const { contentMarkdown, title, coverImage } = blogDetail;
       return (
@@ -33,19 +35,11 @@ const _BlogDetailRoute = ({ fetchBlogDetail, blogDetail, match, history }) => {
       );
     }
   };
-
   return (
     <Row>
       <Col>{renderBlogDetail()}</Col>
     </Row>
   );
 };
-
-export const BlogDetailRoute = connect(
-  state => ({
-    blogDetail: selectBlogDetail(state)
-  }),
-  { fetchBlogDetail: fetchBlogDetailAction }
-)(_BlogDetailRoute);
 
 export default BlogDetailRoute;

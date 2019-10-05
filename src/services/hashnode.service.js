@@ -1,5 +1,5 @@
 import axios from "axios";
-import { commonErrorParser } from "../utils/errorHandler.util";
+import { axiosErrorHandler } from "../utils/errorHandler.utils";
 
 const hashnodeAxios = axios.create({
   baseURL: "https://api.hashnode.com",
@@ -27,10 +27,11 @@ export const getBlogList = async () => {
           }
         }`
     });
-    const publication = res.data.data.user.publication;
+    const { data } = res;
+    const publication = data.data.user.publication;
     return publication === null ? [] : publication.posts;
   } catch (error) {
-    throw new Error(commonErrorParser(error));
+    axiosErrorHandler(error);
   }
 };
 
@@ -46,12 +47,8 @@ export const getBlogDetail = async id => {
         }`
     });
     const post = res.data.data.post;
-    const errors = res.data.errors;
-    if (errors) {
-      throw new Error(JSON.stringify(errors));
-    }
     return post === null ? undefined : post;
   } catch (error) {
-    throw new Error(commonErrorParser(error));
+    axiosErrorHandler(error);
   }
 };

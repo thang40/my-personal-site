@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { LoginForm } from "./loginForm.comp";
 import { loginAction } from "../../../ducks";
-import { useAuthStatus } from "../../../hooks/commonHooks";
+import { useAuthStatus } from "../../../hooks/authHooks";
 
 const _FunAuthRoute = ({ loginAction }) => {
   const isAuth = useAuthStatus(false);

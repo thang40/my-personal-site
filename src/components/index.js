@@ -11,3 +11,4 @@ export * from "./profileCard/profileCard.comp";
 export * from "./introHero/introHero.comp";
 export * from "./itemBar/itemBar.comp";
 export * from "./searchBar/searchBar.comp";
+export * from "./loadingSpinner/loadingSpinner.comp";

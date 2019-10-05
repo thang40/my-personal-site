@@ -13,3 +13,5 @@ const vietnameseTranslate = {
 export const translate = (language, message) => {
   return vietnameseTranslate[message];
 };
+
+export const fuzzySearch = searchStr => {};

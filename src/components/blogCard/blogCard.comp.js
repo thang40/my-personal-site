@@ -4,9 +4,17 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../consts";
 import { ProgressiveImage } from "../progressiveImage/progressiveImage.comp";
+import { datetimeUtils } from "../../utils/datetime.utils";
 import styles from "./blogCard-comp.module.scss";
 
-export const BlogCard = ({ title, cuid, coverImage, slug, loading, theme }) => {
+export const BlogCard = ({
+  title,
+  cuid,
+  coverImage,
+  slug,
+  dateAdded,
+  theme
+}) => {
   return (
     <Link
       id={styles["blog-card"]}
@@ -19,6 +27,9 @@ export const BlogCard = ({ title, cuid, coverImage, slug, loading, theme }) => {
         </Card.Img>
         <Card.Body>
           <Card.Title>{title}</Card.Title>
+          <Card.Text className="text-right">
+            {datetimeUtils.format(dateAdded)}
+          </Card.Text>
         </Card.Body>
       </Card>
     </Link>

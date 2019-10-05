@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, Suspense } from "react";
-import { Footer, Header, SmallContainer } from "./components";
+import { Footer, Header, SmallContainer, LoadingSpinner } from "./components";
 import { Provider } from "react-redux";
 import { initStore, initSaga } from "./store";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ThemeContext, THEMES } from "./context/theme.context";
+import { THEMES } from "./context/theme.context";
 import { ROUTES } from "./consts";
 
 const FunRoute = React.lazy(() => import("./routes/fun/fun.route"));
@@ -35,27 +35,29 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router basename={baseName}>
-        <ThemeContext.Provider
-          value={{ theme: theme, changeTheme: changeTheme }}
-        >
-          <Header theme={theme} ref={headerRef} toggleTheme={changeTheme} />
-          <SmallContainer theme={theme} style={{ minHeight: minBodyHeight }}>
-            <Suspense fallback={<div>...loading</div>}>
-              <Switch>
-                {/* <Sider style={style} /> */}
-                <Route path={ROUTES.HOME_ROUTE} exact component={HomeRoute} />
-                <Route path={ROUTES.BLOG_ROUTE} exact component={BlogRoute} />
-                <Route
-                  path={ROUTES.BLOG_DETAIL_ROUTE}
-                  component={BlogDetailRoute}
-                />
-                <Route path={ROUTES.FUN_ROUTE} component={FunRoute} />
-                <Route component={Page404Route} />
-              </Switch>
-            </Suspense>
-          </SmallContainer>
-          <Footer theme={theme} ref={footerRef} />
-        </ThemeContext.Provider>
+        <Header theme={theme} ref={headerRef} toggleTheme={changeTheme} />
+        <SmallContainer theme={theme} style={{ minHeight: minBodyHeight }}>
+          <Suspense
+            fallback={
+              <div className="text-center">
+                <LoadingSpinner />
+              </div>
+            }
+          >
+            <Switch>
+              {/* <Sider style={style} /> */}
+              <Route path={ROUTES.HOME_ROUTE} exact component={HomeRoute} />
+              <Route path={ROUTES.BLOG_ROUTE} exact component={BlogRoute} />
+              <Route
+                path={ROUTES.BLOG_DETAIL_ROUTE}
+                component={BlogDetailRoute}
+              />
+              <Route path={ROUTES.FUN_ROUTE} component={FunRoute} />
+              <Route component={Page404Route} />
+            </Switch>
+          </Suspense>
+        </SmallContainer>
+        <Footer theme={theme} ref={footerRef} />
       </Router>
     </Provider>
   );

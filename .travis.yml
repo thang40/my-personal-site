@@ -4,8 +4,6 @@ node_js:
 cache:
   directories:
     - node_modules
-before_install:
-  - echo "$github_key"
 script:
   - yarn build
 deploy:
