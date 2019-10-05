@@ -15,9 +15,9 @@ export const Sider = ({ style }) => {
       <Nav.Item as="div">
         <Link to={ROUTES.FUN_POKEDEX_ROUTE}>PokeDex</Link>
       </Nav.Item>
-      <Nav.Item as="div">
+      {/* <Nav.Item as="div">
         <Link to={ROUTES.FUN_AUTH_ROUTE}>Authentication</Link>
-      </Nav.Item>
+      </Nav.Item> */}
     </Nav>
   );
 };

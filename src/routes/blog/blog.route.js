@@ -20,15 +20,22 @@ const BlogRoute = ({ history, ...rest }) => {
       return <div>No data</div>;
     }
     return blogList.map((blog, index) => (
-      <Row>
-        <Col lg={6} md={6} sm={6} key={index}>
-          <BlogCard {...blog} loading={false} theme={theme} />
-        </Col>
-      </Row>
+      <React.Fragment>
+        <Row>
+          <Col lg={6} md={6} sm={6} key={index} className="mb-4">
+            <BlogCard {...blog} loading={false} theme={theme} />
+          </Col>
+        </Row>
+      </React.Fragment>
     ));
   };
 
-  return renderBlogList();
+  return (
+    <React.Fragment>
+      <h2 className="mb-4">Blogs</h2>
+      {renderBlogList()}
+    </React.Fragment>
+  );
 };
 
 export default BlogRoute;

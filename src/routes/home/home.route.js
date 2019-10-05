@@ -24,8 +24,9 @@ export const HomeRoute = () => {
     if (blogList.length === 0) {
       return null;
     }
-    return blogList.map(blog => (
+    return blogList.map((blog, index) => (
       <ItemBar
+        key={index}
         title={blog.title}
         imageSrc={blog.coverImage}
         createdDate={blog.dateAdded}

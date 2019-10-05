@@ -20,7 +20,9 @@ initSaga();
 
 const App = () => {
   const [minBodyHeight, setMinBodyHeight] = useState(0);
-  const [theme, setTheme] = useState(THEMES.LIGHT);
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || THEMES.LIGHT
+  );
   const headerRef = useRef(null);
   const footerRef = useRef(null);
   useEffect(() => {
@@ -29,7 +31,9 @@ const App = () => {
     setMinBodyHeight(window.innerHeight - headerHeight - footerHeight);
   }, []);
   const changeTheme = () => {
-    setTheme(theme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK);
+    const changedTheme = theme === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK;
+    localStorage.setItem("theme", changedTheme);
+    setTheme(changedTheme);
   };
 
   return (

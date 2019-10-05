@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import { ErrorBoundary } from "./components";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.scss";
 // import { initService } from "./services/airtable.service";
 // Init airtable service
 // initService();
