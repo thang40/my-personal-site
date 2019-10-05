@@ -7,7 +7,9 @@ import {
   LoadingSpinner
 } from "../../components";
 import { ThemeContext } from "../../context/theme.context";
+import { Link } from "react-router-dom";
 import { useBlogList } from "../../hooks/blogHooks";
+import { ROUTES } from "../../consts";
 
 export const HomeRoute = () => {
   const { theme } = useContext(ThemeContext);
@@ -25,12 +27,14 @@ export const HomeRoute = () => {
       return null;
     }
     return blogList.map((blog, index) => (
-      <ItemBar
-        key={index}
-        title={blog.title}
-        imageSrc={blog.coverImage}
-        createdDate={blog.dateAdded}
-      />
+      <Link to={`${ROUTES.BLOG_ROUTE}/${blog.slug + "-" + blog.cuid}`}>
+        <ItemBar
+          key={index}
+          title={blog.title}
+          imageSrc={blog.coverImage}
+          createdDate={blog.dateAdded}
+        />
+      </Link>
     ));
   };
   return (
