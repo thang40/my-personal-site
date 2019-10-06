@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Card, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { ProgressiveImage } from "../progressiveImage/progressiveImage.comp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
