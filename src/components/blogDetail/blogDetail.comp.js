@@ -8,7 +8,6 @@ import styles from "./blogDetail-comp.module.scss";
 
 export const BlogDetail = React.memo(
   ({ title, coverImage, detailMarkdown }) => {
-    console.log("render");
     return (
       <div>
         <h1 style={{ textAlign: "center" }}>{title}</h1>

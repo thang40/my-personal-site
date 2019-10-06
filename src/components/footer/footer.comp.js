@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import { THEMES } from "../../context/theme.context";
+import { THEMES } from "../../contexts/theme.context";
 import PropTypes from "prop-types";
 import styles from "./footer-comp.module.scss";
 

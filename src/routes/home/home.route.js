@@ -6,14 +6,20 @@ import {
   ItemBar,
   LoadingSpinner
 } from "../../components";
-import { ThemeContext } from "../../context/theme.context";
+import { ThemeContext } from "../../contexts/theme.context";
 import { Link } from "react-router-dom";
 import { useBlogList } from "../../hooks/blogHooks";
 import { ROUTES } from "../../consts";
+import { withInt } from "../../HOCs/withInt";
+import { LanguageContext } from "../../contexts";
+
+const IntProfileCard = withInt(ProfileCard);
+const IntIntroHero = withInt(IntroHero);
 
 export const HomeRoute = () => {
   const { theme } = useContext(ThemeContext);
   const [blogList, , isLoading] = useBlogList();
+  const { translate } = useContext(LanguageContext);
 
   const renderBlogList = () => {
     if (isLoading) {
@@ -27,9 +33,11 @@ export const HomeRoute = () => {
       return null;
     }
     return blogList.map((blog, index) => (
-      <Link to={`${ROUTES.BLOG_ROUTE}/${blog.slug + "-" + blog.cuid}`}>
+      <Link
+        key={index}
+        to={`${ROUTES.BLOG_ROUTE}/${blog.slug + "-" + blog.cuid}`}
+      >
         <ItemBar
-          key={index}
           title={blog.title}
           imageSrc={blog.coverImage}
           createdDate={blog.dateAdded}
@@ -42,17 +50,17 @@ export const HomeRoute = () => {
       <section>
         <Row className="align-items-center">
           <Col lg="7">
-            <IntroHero />
+            <IntIntroHero />
           </Col>
           <Col lg="5" className="justify-content-end">
-            <ProfileCard theme={theme} />
+            <IntProfileCard theme={theme} />
           </Col>
         </Row>
       </section>
       <section className="mt-2">
         <Row>
           <Col>
-            <h3>Latest Articles</h3>
+            <h3>{translate("Latest Articles")}</h3>
             {renderBlogList()}
           </Col>
         </Row>

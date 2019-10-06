@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
+import PropTypes from "prop-types";
 import styles from "./searchBar-comp.module.css";
 
-export const SearchBar = ({ handleChange }) => {
+export const SearchBar = ({ handleChange, placeholder }) => {
   const [searchStr, setSearchStr] = useState("");
   return (
     <Form.Control
       type="text"
-      placeholder="Search"
+      placeholder={placeholder}
       className="mr-sm-2"
       id={styles["search-bar"]}
       value={searchStr}
@@ -17,4 +18,14 @@ export const SearchBar = ({ handleChange }) => {
       }}
     />
   );
+};
+
+SearchBar.propTypes = {
+  handleChange: PropTypes.func,
+  placeholder: PropTypes.string
+};
+
+SearchBar.defaultProps = {
+  handleChange: () => {},
+  placeholder: "Search"
 };

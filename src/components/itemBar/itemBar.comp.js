@@ -1,9 +1,8 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
-import { ProgressiveImage } from "../progressiveImage/progressiveImage.comp";
-import { upperCase1stChar } from "../../utils/generalHelper.utils";
 import PropTypes from "prop-types";
 import styles from "./itemBar-comp.module.scss";
+import { Row, Col } from "react-bootstrap";
+import { ProgressiveImage } from "../progressiveImage/progressiveImage.comp";
 import { datetimeUtils } from "../../utils/datetime.utils";
 
 export const ItemBar = ({ imageSrc, title, createdDate }) => {
@@ -18,7 +17,7 @@ export const ItemBar = ({ imageSrc, title, createdDate }) => {
           />
         </Col>
         <Col lg="10">
-          <h6>{upperCase1stChar(title)}</h6>
+          <h6 className="text-capitalize">{title}</h6>
           <p className={styles["date-time"]}>
             {createdDate ? datetimeUtils.format(createdDate) : ""}
           </p>

@@ -8,10 +8,10 @@ import {
   faChevronLeft
 } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
-import { THEMES } from "../../context/theme.context";
+import { THEMES } from "../../contexts/theme.context";
 import styles from "./profileCard-comp.module.scss";
 
-export const ProfileCard = ({ theme }) => {
+export const ProfileCard = ({ theme, translate }) => {
   return (
     <Card id={styles["profile-card"]} className={styles[theme]}>
       <Card.Img
@@ -22,12 +22,12 @@ export const ProfileCard = ({ theme }) => {
       />
       <Card.Body>
         <Card.Title>
-          I am Siegen{" "}
+          {translate("I am Siegen")}{" "}
           <OverlayTrigger
             placement="top"
             overlay={
               <Tooltip id="profile-tooltip-top">
-                Meaning "Thang" that's my Vietnamese name
+                {translate(`Meaning "Thang" that's my Vietnamese name`)}
               </Tooltip>
             }
           >
@@ -35,10 +35,10 @@ export const ProfileCard = ({ theme }) => {
           </OverlayTrigger>
         </Card.Title>
         <Card.Text>
-          <FontAwesomeIcon icon={faTerminal} />
-          <span>{` I'm a Front-end Developer from VIETNAM `}</span>
-          <span>{` And I love cat `}</span>
-          <FontAwesomeIcon icon={faChevronLeft} />
+          <FontAwesomeIcon icon={faTerminal} color="#7575dc" />
+          <span>{translate(`I'm a Front-end Developer from VIETNAM`)}</span>
+          <span>{translate(` and I love cat`)}</span>
+          <FontAwesomeIcon icon={faChevronLeft} color="#7575dc" />
         </Card.Text>
         <div className="text-center">
           <Button variant="success">Contact</Button>
@@ -49,9 +49,11 @@ export const ProfileCard = ({ theme }) => {
 };
 
 ProfileCard.propTypes = {
-  theme: PropTypes.oneOf([THEMES.DARK, THEMES.LIGHT])
+  theme: PropTypes.oneOf([THEMES.DARK, THEMES.LIGHT]),
+  translate: PropTypes.func
 };
 
 ProfileCard.defaultProps = {
-  theme: THEMES.LIGHT
+  theme: THEMES.LIGHT,
+  translate: text => text
 };

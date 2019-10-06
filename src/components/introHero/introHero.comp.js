@@ -7,29 +7,39 @@ import {
   faStackOverflow,
   faDev
 } from "@fortawesome/free-brands-svg-icons";
+import PropTypes from "prop-types";
 
-export const IntroHero = () => {
+export const IntroHero = ({ translate }) => {
   return (
     <aside>
       <h1>
-        Hello, <FontAwesomeIcon icon={faGlobeAsia} color="blue" /> !
+        {translate("Hello")},{" "}
+        <FontAwesomeIcon icon={faGlobeAsia} color="#b1d7fa" /> !
       </h1>
       <p>
-        I build things with{" "}
-        <FontAwesomeIcon icon={faChevronRight} color="blue" /> ReactJS{" "}
+        {translate("I build things with")}{" "}
+        <FontAwesomeIcon icon={faChevronRight} color="#7575dc" /> ReactJS{" "}
         <FontAwesomeIcon icon={faReact} color="blue" spin />, Javascript{" "}
-        <FontAwesomeIcon icon={faJs} color="green" />
+        <FontAwesomeIcon icon={faJs} color="#7575dc" />
       </p>
       <p>
-        Me in the community{" "}
-        <FontAwesomeIcon icon={faChevronRight} color="blue" />{" "}
+        {translate("Me in the community")}{" "}
+        <FontAwesomeIcon icon={faChevronRight} color="#7575dc" />{" "}
         <a href="https://stackoverflow.com/users/7175364/thang-le">
           StackOverflow
         </a>{" "}
         <FontAwesomeIcon icon={faStackOverflow} color="gray" />{" "}
         <a href="https://dev.to/thang40">Dev.to</a>{" "}
-        <FontAwesomeIcon icon={faDev} color="green" />
+        <FontAwesomeIcon icon={faDev} color="#7575dc" />
       </p>
     </aside>
   );
+};
+
+IntroHero.propTypes = {
+  translate: PropTypes.func
+};
+
+IntroHero.defaultProps = {
+  translate: text => text
 };
