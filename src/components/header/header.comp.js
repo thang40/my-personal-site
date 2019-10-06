@@ -8,7 +8,8 @@ import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import styles from "./header-comp.module.scss";
 import PropTypes from "prop-types";
 import logo from "../../assets/logo.svg";
-
+const baseName =
+  process.env.NODE_ENV === "production" ? "/my-personal-site" : "/";
 export const Header = React.forwardRef(
   ({ theme, toggleTheme, language, toggleLanguage, translate }, ref) => {
     const displayLang = lang => {
@@ -20,7 +21,7 @@ export const Header = React.forwardRef(
     return (
       <header id={styles["header"]} ref={ref} className={styles[theme]}>
         <Navbar expand="lg" id={styles["header-nav"]}>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href={baseName}>
             <Image style={{ height: "60px" }} src={logo} />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
