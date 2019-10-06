@@ -40,6 +40,9 @@ const App = () => {
   }, []);
 
   useEffect(() => {
+    if (!localStorage.getItem("language")) {
+      localStorage.setItem("language", EN);
+    }
     moment.locale(localStorage.getItem("language"));
   }, []);
 
