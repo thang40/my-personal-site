@@ -47,7 +47,7 @@ export const ProgressiveImage = ({ src, delay, fluid, ...rest }) => {
       {...rest}
       src={internalSrc}
       ref={imgRef}
-      alt={rest.alt}
+      alt={rest.alt || "picture"}
       className={`${rest.className === "undefined" ? "" : rest.className} ${
         fluid ? styles["fluid-img"] : ""
       }`}

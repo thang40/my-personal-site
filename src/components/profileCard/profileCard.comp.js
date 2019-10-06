@@ -40,9 +40,9 @@ export const ProfileCard = ({ theme, translate }) => {
           <span>{translate(` and I love cat`)}</span>
           <FontAwesomeIcon icon={faChevronLeft} color="#7575dc" />
         </Card.Text>
-        <div className="text-center">
+        {/* <div className="text-center">
           <Button variant="success">Contact</Button>
-        </div>
+        </div> */}
       </Card.Body>
     </Card>
   );

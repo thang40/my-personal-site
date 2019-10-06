@@ -54,7 +54,7 @@ export const Header = React.forwardRef(
                   {translate("Fun")}
                 </NavLink>
               </span>
-              <span className="nav-link">
+              {/* <span className="nav-link">
                 <NavLink
                   exact={true}
                   activeClassName={styles["active"]}
@@ -71,7 +71,7 @@ export const Header = React.forwardRef(
                 >
                   {translate("Contact")}
                 </NavLink>
-              </span>
+              </span> */}
             </Nav>
             <Nav className="justify-content-end">
               <Nav.Item>
