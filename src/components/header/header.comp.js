@@ -63,16 +63,16 @@ export const Header = React.forwardRef(
                 >
                   {translate("About Me")}
                 </NavLink>
-              </span>
+              </span> */}
               <span className="nav-link">
                 <NavLink
                   exact={true}
                   activeClassName={styles["active"]}
-                  to="/contact"
+                  to={ROUTES.CONTACT_ROUTE}
                 >
                   {translate("Contact")}
                 </NavLink>
-              </span> */}
+              </span>
             </Nav>
             <Nav className="justify-content-end">
               <Nav.Item>

@@ -6,16 +6,17 @@ import { withInt } from "./HOCs/withInt";
 import { initStore, initSaga } from "./store";
 import { Provider } from "react-redux";
 import { ROUTES } from "./consts";
+import {
+  FunRoute,
+  HomeRoute,
+  BlogRoute,
+  ContactRoute,
+  Page404Route,
+  BlogDetailRoute
+} from "./routes";
 import trans from "./assets/translations/translation.json";
 import moment from "moment";
 
-const FunRoute = React.lazy(() => import("./routes/fun/fun.route"));
-const HomeRoute = React.lazy(() => import("./routes/home/home.route"));
-const BlogRoute = React.lazy(() => import("./routes/blog/blog.route"));
-const Page404Route = React.lazy(() => import("./routes/404/404.route"));
-const BlogDetailRoute = React.lazy(() =>
-  import("./routes/blog/blogDetail/blogDetail.route")
-);
 const { EN, VN } = LANGUAGES;
 const IntHeader = withInt(Header);
 const baseName =
@@ -97,6 +98,7 @@ const App = () => {
                   component={BlogDetailRoute}
                 />
                 <Route path={ROUTES.FUN_ROUTE} component={FunRoute} />
+                <Route path={ROUTES.CONTACT_ROUTE} component={ContactRoute} />
                 <Route component={Page404Route} />
               </Switch>
             </Suspense>

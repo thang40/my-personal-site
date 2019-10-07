@@ -8,6 +8,7 @@ import "./index.scss";
 // import { initService } from "./services/airtable.service";
 // Init airtable service
 // initService();
+
 ReactDOM.render(
   <ErrorBoundary>
     <App />
