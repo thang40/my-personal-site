@@ -38,6 +38,7 @@ export const HomeRoute = () => {
         to={`${ROUTES.BLOG_ROUTE}/${blog.slug + "-" + blog.cuid}`}
       >
         <ItemBar
+          className="mb-2"
           title={blog.title}
           imageSrc={blog.coverImage}
           createdDate={blog.dateAdded}

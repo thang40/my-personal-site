@@ -5,9 +5,9 @@ import { Row, Col } from "react-bootstrap";
 import { ProgressiveImage } from "../progressiveImage/progressiveImage.comp";
 import { datetimeUtils } from "../../utils/datetime.utils";
 
-export const ItemBar = ({ imageSrc, title, createdDate }) => {
+export const ItemBar = ({ imageSrc, title, createdDate, ...props }) => {
   return (
-    <div id={styles["item-bar"]}>
+    <div id={styles["item-bar"]} className={props.className}>
       <Row className="align-items-center">
         <Col lg="2">
           <ProgressiveImage
