@@ -3,15 +3,12 @@ import { Row, Col } from "react-bootstrap";
 import { BlogCard, LoadingSpinner } from "../../components";
 import { ThemeContext } from "../../contexts/theme.context";
 import { useBlogList } from "../../hooks/blogHooks";
-import { withInt } from "../../HOCs/withInt";
 import { LanguageContext } from "../../contexts";
 
-const IntBlogCard = withInt(BlogCard);
-
-const BlogRoute = ({ history, ...rest }) => {
+const BlogRoute = ({ history }) => {
   const { theme } = useContext(ThemeContext);
   const [blogList, , isLoading] = useBlogList();
-  const { translate } = useContext(LanguageContext);
+  const { translate, datetimeFormat } = useContext(LanguageContext);
 
   const renderBlogList = () => {
     if (isLoading) {
@@ -26,7 +23,12 @@ const BlogRoute = ({ history, ...rest }) => {
     }
     return blogList.map((blog, index) => (
       <Col lg={6} md={6} sm={6} key={index} className="mb-4">
-        <IntBlogCard {...blog} loading={false} theme={theme} />
+        <BlogCard
+          {...blog}
+          loading={false}
+          theme={theme}
+          dateAdded={datetimeFormat(blog.dateAdded)}
+        />
       </Col>
     ));
   };

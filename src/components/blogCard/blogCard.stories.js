@@ -5,16 +5,18 @@ import { MemoryRouter } from "react-router-dom";
 
 storiesOf("BlogCard", module)
   .addDecorator(story => (
-    <MemoryRouter initialEntries={["/"]}>{story()}</MemoryRouter>
+    <MemoryRouter initialEntries={["/"]}>
+      <div style={{ width: 300 }}>{story()}</div>
+    </MemoryRouter>
   ))
-  .add("show loading", () => <BlogCard title="hello" />)
-  .add("show card with no cover image", () => (
-    <BlogCard title="hello" loading={false} />
+  .add("With no cover image", () => <BlogCard title="hello" />)
+  .add("With broken cover image", () => (
+    <BlogCard title="hello" loading={false} coverImage="broken link" />
   ))
-  .add("show card with cover image", () => (
+  .add("with cover image", () => (
     <BlogCard
       title="hello"
       loading={false}
-      coverImage="https://hashnode.imgix.net/res/hashnode/image/upload/v1565943384102/TBuT5B3Ap.png"
+      coverImage="https://fakeimg.pl/200x100/?retina=1&text=こんにちは&font=noto"
     />
   ));

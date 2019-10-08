@@ -1,40 +1,27 @@
-const path = require("path");
+const createCompiler = require("@storybook/addon-docs/mdx-compiler-plugin");
 
-module.exports = async ({ config, mode }) => {
+module.exports = async ({ config }) => {
   config.module.rules.push({
-    loader: "babel-loader",
-    exclude: /node_modules/,
-    test: /\.(js|jsx)$/,
-    options: {
-      presets: ["@babel/react"],
-      plugins: [
-        [
-          "import",
-          {
-            libraryName: "antd",
-            libraryDirectory: "es",
-            style: true
-          }
-        ]
-      ]
-    }
-  });
-
-  config.module.rules.push({
-    test: /\.less$/,
-    loaders: [
-      "style-loader",
-      "css-loader",
+    test: /\.(stories|story)\.mdx$/,
+    use: [
       {
-        loader: "less-loader",
+        loader: "babel-loader"
+        // may or may not need this line depending on your app's setup
+      },
+      {
+        loader: "@mdx-js/loader",
         options: {
-          modifyVars: { "@primary-color": "#f00" },
-          javascriptEnabled: true
+          compilers: [createCompiler({})]
         }
       }
-    ],
-    include: [path.resolve(__dirname, "../src"), /[\\/]node_modules[\\/].*antd/]
+    ]
   });
 
+  config.module.rules.push({
+    test: /\.(stories|story)\.[tj]sx?$/,
+    loader: require.resolve("@storybook/source-loader"),
+    exclude: [/node_modules/],
+    enforce: "pre"
+  });
   return config;
 };

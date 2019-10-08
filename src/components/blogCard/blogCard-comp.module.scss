@@ -14,3 +14,7 @@
 .light {
   @include lightTheme;
 }
+
+#blog-card img {
+  max-height: 300px;
+}

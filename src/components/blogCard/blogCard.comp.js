@@ -12,9 +12,7 @@ export const BlogCard = ({
   coverImage,
   slug,
   dateAdded,
-  theme,
-  translate,
-  datetimeFormat
+  theme
 }) => {
   return (
     <Link
@@ -28,9 +26,7 @@ export const BlogCard = ({
         </Card.Img>
         <Card.Body>
           <Card.Title>{title}</Card.Title>
-          <Card.Text className="text-right">
-            {datetimeFormat(dateAdded)}
-          </Card.Text>
+          <Card.Text className="text-right">{dateAdded}</Card.Text>
         </Card.Body>
       </Card>
     </Link>

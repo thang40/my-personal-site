@@ -10,17 +10,14 @@ export const BlogDetail = React.memo(
   ({ title, coverImage, detailMarkdown }) => {
     return (
       <div>
-        <h1 style={{ textAlign: "center" }}>{title}</h1>
-        {coverImage ? (
-          <div style={{ textAlign: "center" }}>
-            <ProgressiveImage
-              src={coverImage}
-              alt={title}
-              fluid={true}
-              className={styles["border-img"]}
-            />
-          </div>
-        ) : null}
+        <h1 className="text-center">{title}</h1>
+        <div className="text-center">
+          <ProgressiveImage
+            src={coverImage}
+            alt={title}
+            className={styles["border-img"]}
+          />
+        </div>
         <ReactMarkdown
           source={detailMarkdown}
           renderers={{
@@ -53,4 +50,10 @@ BlogDetail.propTypes = {
   title: PropTypes.string,
   coverImage: PropTypes.string,
   detailMarkdown: PropTypes.string
+};
+
+BlogDetail.defaultProps = {
+  title: "A title",
+  coverImage: "",
+  detailMarkdown: "your markdown"
 };
