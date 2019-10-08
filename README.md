@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.com/thang40/my-personal-site.svg?branch=master)](https://travis-ci.com/thang40/my-personal-site)
 [![Front‑End_Checklist followed](https://img.shields.io/badge/Front‑End_Checklist-followed-brightgreen.svg)](https://github.com/thedaviddias/Front-End-Checklist/)
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E514GO7)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
