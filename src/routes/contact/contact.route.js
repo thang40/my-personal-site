@@ -1,18 +1,27 @@
-import React, { useContext } from "react";
-import styles from "./contact-route.module.scss";
+import React, { useContext, useEffect, useState } from "react";
 import { LanguageContext } from "../../contexts";
+import { LoadingSpinner } from "../../components";
+import styles from "./contact-route.module.scss";
 
 export const ContactRoute = () => {
   const { translate } = useContext(LanguageContext);
-  // const []
+  const [isIframeLoading, setIsIframeLoading] = useState(true);
+  useEffect(() => {
+    let iframe = document.getElementById(styles["substack-iframe"]);
+    iframe.addEventListener("load", setIsIframeLoading(false));
+  }, []);
   return (
     <React.Fragment>
       <section>
         <h2>Contact</h2>
         <p>{translate("If you love what i do, please subscribe below")}</p>
-        <div className="text-center">
+        <div
+          className="mb-2 d-flex justify-content-center align-items-center"
+          style={{ height: "200px" }}
+        >
           <iframe
             id={styles["substack-iframe"]}
+            style={{ display: isIframeLoading ? "none" : "initial" }}
             title="subscire me"
             width="380"
             height="200"
@@ -20,11 +29,13 @@ export const ContactRoute = () => {
             frameBorder="0"
             scrolling="no"
           ></iframe>
+          {isIframeLoading ? <LoadingSpinner /> : null}
         </div>
-        <p>{translate("Or drop me an Email")}</p>
+        <p>
+          {translate("Or drop me an Email")}: <em>thangle1192@gmail.com</em>
+        </p>
         <p>{translate("Me in some communities")}</p>
         <ul>
-          <li>thangle1192@gmail.com</li>
           <li>
             <a
               rel="noopener noreferrer"
