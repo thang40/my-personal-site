@@ -8,7 +8,7 @@ const schema = yup.object({
   password: yup.string().required()
 });
 
-export const LoginForm = ({ handleSubmit }) => (
+export const LoginForm = ({ handleSubmit, translate }) => (
   <div>
     <Formik
       validationSchema={schema}
@@ -24,10 +24,10 @@ export const LoginForm = ({ handleSubmit }) => (
           <Form.Row>
             {/* USERNAME */}
             <Form.Group as={Col} md="12" controlId="username">
-              <Form.Label>What is my Username?</Form.Label>
+              <Form.Label>{translate("What is my Username?")}</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="USERNAME ONLY I KNOWS"
+                placeholder={translate("USERNAME ONLY I KNOW")}
                 name="username"
                 value={values.username}
                 onChange={handleChange}
@@ -39,10 +39,10 @@ export const LoginForm = ({ handleSubmit }) => (
             </Form.Group>
             {/* PASSWORD */}
             <Form.Group as={Col} md="12" controlId="password">
-              <Form.Label>Only me know the password</Form.Label>
+              <Form.Label>{translate("Only me know the password")}</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="PASSWORD ONLY I KNOWS"
+                placeholder={translate("PASSWORD ONLY I KNOWS")}
                 name="password"
                 value={values.password}
                 onChange={handleChange}

@@ -4,9 +4,12 @@ import { Nav, Button } from "react-bootstrap";
 import { faHome, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { LoginForm, SmallContainer } from "../../components";
+import { withInt } from "../../HOCs/withInt";
 import { THEMES, themeContext, languageContext } from "../../contexts";
 import { ROUTES } from "../../consts";
 import styles from "./login-route.module.scss";
+
+const IntLoginForm = withInt(LoginForm);
 
 export const LoginRoute = () => {
   const { toggleTheme, theme } = useContext(themeContext);
@@ -55,7 +58,7 @@ export const LoginRoute = () => {
             {translate("THIS PLACE IS ONLY FOR ADMIN!!")}
           </h1>
           <h2>{translate("ARE YOU ME? PROVE IT")}</h2>
-          <LoginForm
+          <IntLoginForm
             handleSubmit={() => alert(translate("under development 😂 😂 😂"))}
           />
         </section>
