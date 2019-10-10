@@ -53,7 +53,7 @@ export const LoginForm = ({ handleSubmit, translate }) => (
               </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
-          <Button type="submit">Let me in!</Button>
+          <Button type="submit">{translate("Let me in! 😂")}</Button>
         </Form>
       )}
     </Formik>
