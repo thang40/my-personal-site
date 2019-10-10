@@ -1,4 +1,4 @@
-import React from "react";
+import { lazy } from "react";
 
 // export * from "./home/home.route";
 // export * from "./blog/blog.route";
@@ -7,11 +7,29 @@ import React from "react";
 // export * from "./fun/fun.route";
 // export * from "./404/404.route";
 
-export const FunRoute = React.lazy(() => import("./fun/fun.route"));
-export const HomeRoute = React.lazy(() => import("./home/home.route"));
-export const BlogRoute = React.lazy(() => import("./blog/blog.route"));
-export const Page404Route = React.lazy(() => import("./404/404.route"));
-export const BlogDetailRoute = React.lazy(() =>
-  import("./blog/blogDetail/blogDetail.route")
-);
-export const ContactRoute = React.lazy(() => import("./contact/contact.route"));
+// export const Page404Route = React.lazy(() => import("./404/404.route"));
+// export const LoginRoute = React.lazy(() => import("./Login/login.route"));
+// export const MainApp = React.lazy(() => import("./mainApp/mainApp"));
+
+const delayTime = 1000;
+
+export const Page404Route = lazy(() => {
+  return Promise.all([
+    import("./404/404.route"),
+    new Promise(resolve => setTimeout(resolve, delayTime))
+  ]).then(([moduleExports]) => moduleExports);
+});
+
+export const LoginRoute = lazy(() => {
+  return Promise.all([
+    import("./Login/login.route"),
+    new Promise(resolve => setTimeout(resolve, delayTime))
+  ]).then(([moduleExports]) => moduleExports);
+});
+
+export const MainApp = lazy(() => {
+  return Promise.all([
+    import("./mainApp/mainApp"),
+    new Promise(resolve => setTimeout(resolve, delayTime))
+  ]).then(([moduleExports]) => moduleExports);
+});

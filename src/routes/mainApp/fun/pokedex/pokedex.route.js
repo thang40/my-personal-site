@@ -6,11 +6,11 @@ import {
   searchPokemonAction,
   selectPokemonListView,
   selectIsLoading
-} from "../../../ducks";
+} from "../../../../ducks";
 import { PokemonDetails } from "./pokemonDetails/pokemonDetails.route";
-import { SearchBar } from "../../../components";
+import { SearchBar } from "../../../../components";
 import { PokemonList } from "./pokemonList/pokemonList.comp";
-import { LanguageContext } from "../../../contexts";
+import { LanguageContext } from "../../../../contexts";
 // import styles from "./pokedex-route.module.css";
 
 const _FunPokedexRoute = ({ searchPokemon, pokemons, isLoading }) => {

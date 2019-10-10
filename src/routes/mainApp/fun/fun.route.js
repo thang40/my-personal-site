@@ -1,6 +1,6 @@
 import React from "react";
-import { Sider } from "../../components";
-import { ROUTES } from "../../consts";
+import { Sider } from "../../../components";
+import { ROUTES } from "../../../consts";
 import { Route } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { FunAuthRoute } from "./authen/authen.route";

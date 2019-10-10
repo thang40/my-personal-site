@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { Row, Col } from "react-bootstrap";
-import { BlogCard, LoadingSpinner } from "../../components";
-import { ThemeContext } from "../../contexts/theme.context";
-import { useBlogList } from "../../hooks/blogHooks";
-import { LanguageContext } from "../../contexts";
+import { BlogCard, LoadingSpinner } from "../../../components";
+import { useBlogList } from "../../../hooks/blogHooks";
+import { LanguageContext, ThemeContext } from "../../../contexts";
 
 const BlogRoute = ({ history }) => {
   const { theme } = useContext(ThemeContext);

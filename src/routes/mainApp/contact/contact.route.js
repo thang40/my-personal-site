@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { LanguageContext } from "../../contexts";
-import { LoadingSpinner } from "../../components";
+import { LanguageContext } from "../../../contexts";
+import { LoadingSpinner } from "../../../components";
 import styles from "./contact-route.module.scss";
 
 export const ContactRoute = () => {

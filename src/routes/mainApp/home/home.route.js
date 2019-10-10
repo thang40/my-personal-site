@@ -5,13 +5,12 @@ import {
   IntroHero,
   ItemBar,
   LoadingSpinner
-} from "../../components";
-import { ThemeContext } from "../../contexts/theme.context";
+} from "../../../components";
 import { Link } from "react-router-dom";
-import { useBlogList } from "../../hooks/blogHooks";
-import { ROUTES } from "../../consts";
-import { withInt } from "../../HOCs/withInt";
-import { LanguageContext } from "../../contexts";
+import { useBlogList } from "../../../hooks/blogHooks";
+import { ROUTES } from "../../../consts";
+import { withInt } from "../../../HOCs/withInt";
+import { LanguageContext, ThemeContext } from "../../../contexts";
 
 const IntProfileCard = withInt(ProfileCard);
 const IntIntroHero = withInt(IntroHero);

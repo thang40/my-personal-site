@@ -1,44 +1,27 @@
-import React, { useState, useEffect, useRef, Suspense } from "react";
-import { Footer, Header, SmallContainer, LoadingSpinner } from "./components";
+import React, { useState, useEffect, Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { THEMES, LANGUAGES, LanguageContext } from "./contexts";
-import { withInt } from "./HOCs/withInt";
+import { THEMES, LANGUAGES, LanguageContext, ThemeContext } from "./contexts";
+import { LoadingSpinner } from "./components";
 import { initStore, initSaga } from "./store";
 import { Provider } from "react-redux";
 import { ROUTES } from "./consts";
-import {
-  FunRoute,
-  HomeRoute,
-  BlogRoute,
-  ContactRoute,
-  Page404Route,
-  BlogDetailRoute
-} from "./routes";
 import trans from "./assets/translations/translation.json";
 import moment from "moment";
+import { LoginRoute, MainApp, Page404Route } from "./routes";
 
 const { EN, VN } = LANGUAGES;
-const IntHeader = withInt(Header);
 const baseName =
   process.env.NODE_ENV === "production" ? "/my-personal-site" : "/";
 const store = initStore();
 initSaga();
 
 const App = () => {
-  const [minBodyHeight, setMinBodyHeight] = useState(0);
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") || THEMES.LIGHT
   );
   const [language, setLanguage] = useState(
     localStorage.getItem("language") || EN
   );
-  const headerRef = useRef(null);
-  const footerRef = useRef(null);
-  useEffect(() => {
-    const headerHeight = headerRef.current.clientHeight;
-    const footerHeight = footerRef.current.clientHeight;
-    setMinBodyHeight(window.innerHeight - headerHeight - footerHeight);
-  }, []);
 
   useEffect(() => {
     if (!localStorage.getItem("language")) {
@@ -72,38 +55,29 @@ const App = () => {
     <Provider store={store}>
       <Router basename={baseName}>
         <LanguageContext.Provider
-          value={{ language, translate, datetimeFormat }}
+          value={{
+            language,
+            translate,
+            datetimeFormat,
+            toggleLanguage: changeLanguage
+          }}
         >
-          <IntHeader
-            ref={headerRef}
-            theme={theme}
-            language={language}
-            toggleTheme={changeTheme}
-            toggleLanguage={changeLanguage}
-          />
-          <SmallContainer theme={theme} style={{ minHeight: minBodyHeight }}>
+          {/* style={{ position: "absolute", top: "50%", left: "50%" }} */}
+          <ThemeContext.Provider value={{ theme, toggleTheme: changeTheme }}>
             <Suspense
               fallback={
-                <div className="text-center">
-                  <LoadingSpinner />
+                <div className="d-flex justify-content-center align-items-center min-vw-100 min-vh-100">
+                  <LoadingSpinner size="big" />
                 </div>
               }
             >
               <Switch>
-                {/* <Sider style={style} /> */}
-                <Route path={ROUTES.HOME_ROUTE} exact component={HomeRoute} />
-                <Route path={ROUTES.BLOG_ROUTE} exact component={BlogRoute} />
-                <Route
-                  path={ROUTES.BLOG_DETAIL_ROUTE}
-                  component={BlogDetailRoute}
-                />
-                <Route path={ROUTES.FUN_ROUTE} component={FunRoute} />
-                <Route path={ROUTES.CONTACT_ROUTE} component={ContactRoute} />
+                <Route path={ROUTES.LOGIN_ROUTE} component={LoginRoute} />
+                <Route path={ROUTES.HOME_ROUTE} component={MainApp} />
                 <Route component={Page404Route} />
               </Switch>
             </Suspense>
-          </SmallContainer>
-          <Footer theme={theme} ref={footerRef} />
+          </ThemeContext.Provider>
         </LanguageContext.Provider>
       </Router>
     </Provider>

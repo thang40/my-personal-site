@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Nav, Navbar, Image, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../../consts";
@@ -6,7 +7,6 @@ import { THEMES } from "../../contexts/theme.context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import styles from "./header-comp.module.scss";
-import PropTypes from "prop-types";
 import logo from "../../assets/logo.svg";
 const baseName =
   process.env.NODE_ENV === "production" ? "/my-personal-site" : "/";
@@ -75,6 +75,21 @@ export const Header = React.forwardRef(
               </span>
             </Nav>
             <Nav className="justify-content-end">
+              {/* <Nav.Item>
+                <NavLink
+                  id={styles["theme-btn"]}
+                  className="nav-link"
+                  exact={true}
+                  activeClassName={styles["active"]}
+                  to={ROUTES.LOGIN_ROUTE}
+                >
+                  <FontAwesomeIcon
+                    size="lg"
+                    icon={faUser}
+                    color={theme === THEMES.DARK ? "#fff" : "#7575dc"}
+                  />
+                </NavLink>
+              </Nav.Item> */}
               <Nav.Item>
                 <span
                   id={styles["theme-btn"]}

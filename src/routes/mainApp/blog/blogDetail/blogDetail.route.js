@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import { BlogDetail, LoadingSpinner } from "../../../components";
-import { getBlogDetail } from "../../../services/hashnode.service";
+import { BlogDetail, LoadingSpinner } from "../../../../components";
+import { getBlogDetail } from "../../../../services/hashnode.service";
 
 const BlogDetailRoute = ({ match }) => {
   const [loading, setLoading] = useState(true);
