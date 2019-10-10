@@ -1,6 +1,6 @@
 import { lazy } from "react";
 
-const delayTime = 5000000;
+const delayTime = 1000;
 
 export const Page404Route = lazy(() => {
   return Promise.all([
