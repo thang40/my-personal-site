@@ -10,7 +10,7 @@ import styles from "./login-route.module.scss";
 
 export const LoginRoute = () => {
   const { toggleTheme, theme } = useContext(themeContext);
-  const { language, toggleLanguage } = useContext(languageContext);
+  const { language, toggleLanguage, translate } = useContext(languageContext);
   const displayLang = lang => {
     if (lang === "vi") {
       return "vn";
@@ -51,9 +51,12 @@ export const LoginRoute = () => {
       </nav>
       <SmallContainer>
         <section className="ml-5 mr-5">
-          <h1 className="pb-5 pt-5">WHO ARE YOU</h1>
+          <h1 className="pb-5 pt-5">
+            {translate("THIS PLACE IS ONLY FOR ADMIN!!")}
+          </h1>
+          <h2>{translate("ARE YOU ME? PROVE IT")}</h2>
           <LoginForm
-            handleSubmit={() => alert("under development 😂 😂 😂 ")}
+            handleSubmit={() => alert(translate("under development 😂 😂 😂"))}
           />
         </section>
       </SmallContainer>

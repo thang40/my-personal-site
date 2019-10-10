@@ -10,7 +10,6 @@ const schema = yup.object({
 
 export const LoginForm = ({ handleSubmit }) => (
   <div>
-    <h1>ARE YOU ME? PROVE IT</h1>
     <Formik
       validationSchema={schema}
       onSubmit={handleSubmit}
