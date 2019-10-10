@@ -1,13 +1,5 @@
 import { lazy } from "react";
 
-// export const FunRoute = React.lazy(() => import("./fun/fun.route"));
-// export const HomeRoute = React.lazy(() => import("./home/home.route"));
-// export const BlogRoute = React.lazy(() => import("./blog/blog.route"));
-// export const ContactRoute = React.lazy(() => import("./contact/contact.route"));
-// export const BlogDetailRoute = React.lazy(() =>
-//   import("./blog/blogDetail/blogDetail.route")
-// );
-
 const delayTime = 700;
 
 export const FunRoute = lazy(() => {
