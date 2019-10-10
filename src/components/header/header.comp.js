@@ -1,11 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Nav, Navbar, Image, Button } from "react-bootstrap";
+import {
+  Nav,
+  Navbar,
+  Image,
+  Button,
+  OverlayTrigger,
+  Tooltip
+} from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../../consts";
 import { THEMES } from "../../contexts/theme.context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faSun, faMoon, faUser } from "@fortawesome/free-solid-svg-icons";
 import styles from "./header-comp.module.scss";
 import logo from "../../assets/logo.svg";
 const baseName =
@@ -75,7 +82,7 @@ export const Header = React.forwardRef(
               </span>
             </Nav>
             <Nav className="justify-content-end">
-              {/* <Nav.Item>
+              <Nav.Item>
                 <NavLink
                   id={styles["theme-btn"]}
                   className="nav-link"
@@ -83,13 +90,22 @@ export const Header = React.forwardRef(
                   activeClassName={styles["active"]}
                   to={ROUTES.LOGIN_ROUTE}
                 >
-                  <FontAwesomeIcon
-                    size="lg"
-                    icon={faUser}
-                    color={theme === THEMES.DARK ? "#fff" : "#7575dc"}
-                  />
+                  <OverlayTrigger
+                    placement="bottom"
+                    overlay={
+                      <Tooltip id="profile-tooltip-top">
+                        {translate(`Stop! Don't click this!!`)}
+                      </Tooltip>
+                    }
+                  >
+                    <FontAwesomeIcon
+                      size="lg"
+                      icon={faUser}
+                      color={theme === THEMES.DARK ? "#fff" : "#7575dc"}
+                    />
+                  </OverlayTrigger>
                 </NavLink>
-              </Nav.Item> */}
+              </Nav.Item>
               <Nav.Item>
                 <span
                   id={styles["theme-btn"]}

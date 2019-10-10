@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../contexts";
+import { themeContext } from "../contexts";
 
 export const withTheme = Comp => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(themeContext);
   return <Comp theme={theme} changeTheme={toggleTheme} />;
 };

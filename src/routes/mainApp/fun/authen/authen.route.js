@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
-import { LoginForm } from "./loginForm.comp";
+import { LoginForm } from "../../../../components";
 import { loginAction } from "../../../../ducks";
 import { useAuthStatus } from "../../../../hooks/authHooks";
 

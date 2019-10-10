@@ -12,3 +12,4 @@ export * from "./introHero/introHero.comp";
 export * from "./itemBar/itemBar.comp";
 export * from "./searchBar/searchBar.comp";
 export * from "./loadingSpinner/loadingSpinner.comp";
+export * from "./loginForm/loginForm.comp";

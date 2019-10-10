@@ -12,7 +12,7 @@ import {
   LoadingSpinner
 } from "../../components";
 import { Route } from "react-router-dom";
-import { LanguageContext, ThemeContext } from "../../contexts";
+import { languageContext, themeContext } from "../../contexts";
 import { withInt } from "../../HOCs/withInt";
 import { ROUTES } from "../../consts";
 import {
@@ -27,8 +27,8 @@ const IntHeader = withInt(Header);
 
 const MainApp = () => {
   const [minBodyHeight, setMinBodyHeight] = useState(0);
-  const { language, toggleLanguage } = useContext(LanguageContext);
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { language, toggleLanguage } = useContext(languageContext);
+  const { theme, toggleTheme } = useContext(themeContext);
   const headerRef = useRef(null);
   const footerRef = useRef(null);
   useEffect(() => {

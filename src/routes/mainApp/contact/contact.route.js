@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { LanguageContext } from "../../../contexts";
+import { languageContext } from "../../../contexts";
 import { LoadingSpinner } from "../../../components";
 import styles from "./contact-route.module.scss";
 
 export const ContactRoute = () => {
-  const { translate } = useContext(LanguageContext);
+  const { translate } = useContext(languageContext);
   const [isIframeLoading, setIsIframeLoading] = useState(true);
   useEffect(() => {
     let iframe = document.getElementById(styles["substack-iframe"]);

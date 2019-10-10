@@ -10,11 +10,11 @@ import {
 import { PokemonDetails } from "./pokemonDetails/pokemonDetails.route";
 import { SearchBar } from "../../../../components";
 import { PokemonList } from "./pokemonList/pokemonList.comp";
-import { LanguageContext } from "../../../../contexts";
+import { languageContext } from "../../../../contexts";
 // import styles from "./pokedex-route.module.css";
 
 const _FunPokedexRoute = ({ searchPokemon, pokemons, isLoading }) => {
-  const { translate } = useContext(LanguageContext);
+  const { translate } = useContext(languageContext);
   return (
     <React.Fragment>
       <Row>

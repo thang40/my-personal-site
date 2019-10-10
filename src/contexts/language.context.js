@@ -4,7 +4,7 @@ export const LANGUAGES = {
   VN: "vi"
 };
 
-export const LanguageContext = React.createContext({
+export const languageContext = React.createContext({
   languague: LANGUAGES.EN,
   toggleLanguage: () => {},
   translate: () => {},

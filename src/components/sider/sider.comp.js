@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../consts";
 import { Nav } from "react-bootstrap";
-// import { ThemeContext } from "../../context/theme.context";
+// import { themeContext } from "../../context/theme.context";
 
 // const { SubMenu } = Menu;
 
 export const Sider = ({ style }) => {
-  // const theme = useContext(ThemeContext);
+  // const theme = useContext(themeContext);
 
   return (
     <Nav defaultActiveKey="/home" className="flex-column">

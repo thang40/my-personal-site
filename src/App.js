@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { THEMES, LANGUAGES, LanguageContext, ThemeContext } from "./contexts";
+import { THEMES, LANGUAGES, languageContext, themeContext } from "./contexts";
 import { LoadingSpinner } from "./components";
 import { initStore, initSaga } from "./store";
 import { Provider } from "react-redux";
@@ -54,7 +54,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router basename={baseName}>
-        <LanguageContext.Provider
+        <languageContext.Provider
           value={{
             language,
             translate,
@@ -63,7 +63,7 @@ const App = () => {
           }}
         >
           {/* style={{ position: "absolute", top: "50%", left: "50%" }} */}
-          <ThemeContext.Provider value={{ theme, toggleTheme: changeTheme }}>
+          <themeContext.Provider value={{ theme, toggleTheme: changeTheme }}>
             <Suspense
               fallback={
                 <div className="d-flex justify-content-center align-items-center min-vw-100 min-vh-100">
@@ -77,8 +77,8 @@ const App = () => {
                 <Route component={Page404Route} />
               </Switch>
             </Suspense>
-          </ThemeContext.Provider>
-        </LanguageContext.Provider>
+          </themeContext.Provider>
+        </languageContext.Provider>
       </Router>
     </Provider>
   );

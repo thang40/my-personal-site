@@ -10,15 +10,15 @@ import { Link } from "react-router-dom";
 import { useBlogList } from "../../../hooks/blogHooks";
 import { ROUTES } from "../../../consts";
 import { withInt } from "../../../HOCs/withInt";
-import { LanguageContext, ThemeContext } from "../../../contexts";
+import { languageContext, themeContext } from "../../../contexts";
 
 const IntProfileCard = withInt(ProfileCard);
 const IntIntroHero = withInt(IntroHero);
 
 export const HomeRoute = () => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(themeContext);
   const [blogList, , isLoading] = useBlogList();
-  const { translate } = useContext(LanguageContext);
+  const { translate } = useContext(languageContext);
 
   const renderBlogList = () => {
     if (isLoading) {

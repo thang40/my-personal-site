@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { LanguageContext } from "../contexts";
+import { languageContext } from "../contexts";
 
 export const withInt = Comp => {
   return React.forwardRef((props, ref) => {
-    const { translate, datetimeFormat } = useContext(LanguageContext);
+    const { translate, datetimeFormat } = useContext(languageContext);
     return (
       <Comp
         translate={translate}

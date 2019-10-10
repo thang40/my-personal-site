@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { Row, Col } from "react-bootstrap";
 import { BlogCard, LoadingSpinner } from "../../../components";
 import { useBlogList } from "../../../hooks/blogHooks";
-import { LanguageContext, ThemeContext } from "../../../contexts";
+import { languageContext, themeContext } from "../../../contexts";
 
 const BlogRoute = ({ history }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(themeContext);
   const [blogList, , isLoading] = useBlogList();
-  const { translate, datetimeFormat } = useContext(LanguageContext);
+  const { translate, datetimeFormat } = useContext(languageContext);
 
   const renderBlogList = () => {
     if (isLoading) {

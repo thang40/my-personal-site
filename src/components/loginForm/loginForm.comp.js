@@ -8,12 +8,12 @@ const schema = yup.object({
   password: yup.string().required()
 });
 
-export const LoginForm = () => (
+export const LoginForm = ({ handleSubmit }) => (
   <div>
-    <h1>Anywhere in your app!</h1>
+    <h1>ARE YOU ME? PROVE IT</h1>
     <Formik
       validationSchema={schema}
-      onSubmit={console.log}
+      onSubmit={handleSubmit}
       initialValues={{
         username: "",
         password: ""
@@ -25,10 +25,10 @@ export const LoginForm = () => (
           <Form.Row>
             {/* USERNAME */}
             <Form.Group as={Col} md="12" controlId="username">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>What is my Username?</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Username"
+                placeholder="USERNAME ONLY I KNOWS"
                 name="username"
                 value={values.username}
                 onChange={handleChange}
@@ -40,10 +40,10 @@ export const LoginForm = () => (
             </Form.Group>
             {/* PASSWORD */}
             <Form.Group as={Col} md="12" controlId="password">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Only me know the password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Password"
+                placeholder="PASSWORD ONLY I KNOWS"
                 name="password"
                 value={values.password}
                 onChange={handleChange}
@@ -54,7 +54,7 @@ export const LoginForm = () => (
               </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
-          <Button type="submit">Submit form</Button>
+          <Button type="submit">Let me in!</Button>
         </Form>
       )}
     </Formik>
