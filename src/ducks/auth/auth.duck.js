@@ -3,13 +3,13 @@ import { clearAuthData } from "../../services/auth.service";
 
 const LOGIN_REQUEST = "@@Auth/LOGIN_REQUEST";
 const LOGOUT_REQUEST = "@@Auth/LOGOUT_REQUEST";
-const LOGIN_FINISH = "@@Auth/LOGIN_FINISH";
-const LOGOUT_FINISH = "@@Auth/LOGOUT_FINISH";
+const LOGIN_SUCCESS = "@@Auth/LOGIN_SUCCESS";
+const LOGOUT_SUCCESS = "@@Auth/LOGOUT_SUCCESS";
 const INIT_USERDATA = "@@Auth/INIT_USERDATA";
 
 // action creator
-export const loginAction = loginValues => {
-  return { type: LOGIN_REQUEST, payload: loginValues };
+export const loginAction = (loginValues, handleEvents) => {
+  return { type: LOGIN_REQUEST, payload: { loginValues, handleEvents } };
 };
 export const logoutAction = () => {
   return { type: LOGOUT_REQUEST };
@@ -23,13 +23,13 @@ const initialState = {
 
 export const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_FINISH: {
+    case LOGIN_SUCCESS: {
       return {
         ...state,
         ...action.payload
       };
     }
-    case LOGOUT_FINISH: {
+    case LOGOUT_SUCCESS: {
       return {
         ...state,
         username: null,
@@ -57,46 +57,36 @@ export const selectUsername = state => state.AuthReducer.username;
 export const selectUserRoles = state => state.AuthReducer.roles;
 // side effect
 function* watchLogin(action) {
-  const { username, password } = action.payload;
-  let userData;
-  if (username === "admin" && password === "admin") {
-    userData = {
-      username: "admin",
-      name: "le van thang",
-      roles: ["admin", "user", "VIP"]
-    };
-    const authValues = {
-      apiToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6InRoYW5nIGxlIiwiaWF0IjoxNTE2MjM5MDIyfQ.RwCuXkEg2S1027iFOO3k59f8LFPXNdPrKjvAlLSzIo4",
-      ...userData
-    };
-    localStorage.setItem("auth", JSON.stringify(authValues));
+  const adminUsername = process.env.REACT_APP_ADMIN_USERNAME;
+  const adminPassword = process.env.REACT_APP_ADMIN_PASSWORD;
+  const { loginValues, handleEvents } = action.payload;
+  const { username, password } = loginValues;
+  const { handleFail, handleSuccess, handleError } = handleEvents;
+  try {
+    if (username === adminUsername && password === adminPassword) {
+      const authValues = {
+        apiToken: "Fake Token KEKW",
+        name: "le van thang",
+        roles: ["admin", "user", "VIP"]
+      };
+      localStorage.setItem("auth", JSON.stringify(authValues));
+      yield put({
+        type: LOGIN_SUCCESS,
+        payload: authValues
+      });
+      handleSuccess();
+    } else {
+      handleFail();
+    }
+  } catch (error) {
+    handleError();
   }
-
-  if (username === "thang40" && password === "thang40") {
-    userData = {
-      username: "thang40",
-      name: "le van thang",
-      roles: ["user", "VIP"]
-    };
-    const authValues = {
-      apiToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6InRoYW5nIGxlIiwiaWF0IjoxNTE2MjM5MDIyfQ.RwCuXkEg2S1027iFOO3k59f8LFPXNdPrKjvAlLSzIo4",
-      ...userData
-    };
-    localStorage.setItem("auth", JSON.stringify(authValues));
-  }
-
-  yield put({
-    type: LOGIN_FINISH,
-    payload: userData
-  });
 }
 
 function* watchLogout(action) {
   clearAuthData();
   yield put({
-    type: LOGOUT_FINISH
+    type: LOGOUT_SUCCESS
   });
 }
 

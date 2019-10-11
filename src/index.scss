@@ -17,6 +17,12 @@ a:focus {
   opacity: 1;
 }
 
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 1200px) {
   legend {
     font-size: calc(1.275rem + 0.3vw);

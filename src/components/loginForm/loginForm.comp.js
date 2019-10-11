@@ -2,13 +2,14 @@ import React from "react";
 import { Formik } from "formik";
 import { Col, Form, Button } from "react-bootstrap";
 import * as yup from "yup";
+import { LoadingSpinner } from "../loadingSpinner/loadingSpinner.comp";
 
 const schema = yup.object({
   username: yup.string().required(),
   password: yup.string().required()
 });
 
-export const LoginForm = ({ handleSubmit, translate }) => (
+export const LoginForm = ({ handleSubmit, isLoading, translate }) => (
   <Formik
     validationSchema={schema}
     onSubmit={handleSubmit}
@@ -31,6 +32,7 @@ export const LoginForm = ({ handleSubmit, translate }) => (
               value={values.username}
               onChange={handleChange}
               isInvalid={errors.username}
+              autoComplete="off"
             />
             <Form.Control.Feedback type="invalid">
               {errors.username}
@@ -52,7 +54,22 @@ export const LoginForm = ({ handleSubmit, translate }) => (
             </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
-        <Button type="submit">{translate("Let me in! 😂")}</Button>
+        <Button type="submit" variant="warning" style={{ minWidth: "8rem" }}>
+          {isLoading ? (
+            <LoadingSpinner size="sm" as="span" />
+          ) : (
+            <React.Fragment>
+              {translate("Let me in!")}
+              <span
+                role="img"
+                aria-label="joy"
+                style={{ animation: "spin 1s infinite linear" }}
+              >
+                😂
+              </span>
+            </React.Fragment>
+          )}
+        </Button>
       </Form>
     )}
   </Formik>
