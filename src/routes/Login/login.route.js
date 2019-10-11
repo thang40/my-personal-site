@@ -21,7 +21,7 @@ export const LoginRoute = () => {
     return lang;
   };
   return (
-    <div id={styles["login"]} className="vw-100 text-white-50">
+    <div id={styles["login"]} className="vh-100 text-white-50">
       <nav className="p-2 d-flex">
         <Nav className="mr-auto align-items-center">
           <Nav.Item>
@@ -53,11 +53,11 @@ export const LoginRoute = () => {
         </Nav>
       </nav>
       <SmallContainer>
-        <section className="ml-5 mr-5">
-          <h1 className="pb-5 pt-5">
-            {translate("THIS PLACE IS ONLY FOR ADMIN!!")}
-          </h1>
-          <h2>{translate("ARE YOU ME? PROVE IT")}</h2>
+        <h1 className="display-3 text-center">
+          {translate("THIS PLACE IS ONLY FOR ADMIN!!")}
+        </h1>
+        <h2 className="display-4 text-center">{translate("ARE YOU ME?")}</h2>
+        <section className="d-flex justify-content-center mt-4">
           <IntLoginForm
             handleSubmit={() => alert(translate("under development 😂 😂 😂"))}
           />
