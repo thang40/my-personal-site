@@ -21,7 +21,7 @@ export const LoginRoute = () => {
     return lang;
   };
   return (
-    <div id={styles["login"]} className="vh-100 vw-100 text-white-50">
+    <div id={styles["login"]} className="vw-100 text-white-50">
       <nav className="p-2 d-flex">
         <Nav className="mr-auto align-items-center">
           <Nav.Item>
