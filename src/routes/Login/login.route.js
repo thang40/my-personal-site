@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Nav, Button } from "react-bootstrap";
 import { faHome, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
-import { LoginForm, SmallContainer, CustomToast } from "../../components";
+import { LoginForm, SmallContainer } from "../../components";
 import { withInt } from "../../HOCs/withInt";
 import { THEMES, themeContext, languageContext } from "../../contexts";
 import { loginAction } from "../../ducks";
