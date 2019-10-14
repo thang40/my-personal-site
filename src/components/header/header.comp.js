@@ -12,23 +12,64 @@ import { NavLink } from "react-router-dom";
 import { ROUTES } from "../../consts";
 import { THEMES } from "../../contexts/theme.context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSun,
+  faMoon,
+  faUser,
+  faCrown
+} from "@fortawesome/free-solid-svg-icons";
 import styles from "./header-comp.module.scss";
 import logo from "../../assets/logo.svg";
-const baseName =
-  process.env.NODE_ENV === "production" ? "/my-personal-site" : "/";
+import { useAuthStatus } from "../../hooks/authHooks";
+import { HoldButton } from "../holdButton/holdButton.comp";
 export const Header = React.forwardRef(
-  ({ theme, toggleTheme, language, toggleLanguage, translate }, ref) => {
+  (
+    { theme, toggleTheme, language, logoutAction, toggleLanguage, translate },
+    ref
+  ) => {
+    const isAuth = useAuthStatus();
     const displayLang = lang => {
       if (lang === "vi") {
         return "vn";
       }
       return lang;
     };
+    const renderUserMenu = () => {
+      return (
+        <NavLink
+          id={styles["theme-btn"]}
+          className="nav-link"
+          exact={true}
+          activeClassName={styles["active"]}
+          to={isAuth ? "/admin" : ROUTES.LOGIN_ROUTE}
+        >
+          <OverlayTrigger
+            placement="bottom"
+            overlay={
+              <Tooltip id="profile-tooltip-top">
+                {translate(
+                  isAuth
+                    ? "Welcome Admin 🔱!! press and hold to log out"
+                    : "Stop! Don't click this!!"
+                )}
+              </Tooltip>
+            }
+          >
+            <HoldButton
+              size="lg"
+              enableHolding={isAuth}
+              handleAfterHold={isAuth ? logoutAction : undefined}
+              icon={isAuth ? faCrown : faUser}
+              color={theme === THEMES.DARK ? "#fff" : "#7575dc"}
+            />
+          </OverlayTrigger>
+        </NavLink>
+      );
+    };
     return (
       <header id={styles["header"]} ref={ref} className={styles[theme]}>
         <Navbar expand="lg" id={styles["header-nav"]}>
-          <Navbar.Brand href={baseName}>
+          <Navbar.Brand href={ROUTES.ROUTE_BASENAME}>
             <Image style={{ height: "60px" }} src={logo} />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -82,30 +123,7 @@ export const Header = React.forwardRef(
               </span>
             </Nav>
             <Nav className="justify-content-end">
-              <Nav.Item>
-                <NavLink
-                  id={styles["theme-btn"]}
-                  className="nav-link"
-                  exact={true}
-                  activeClassName={styles["active"]}
-                  to={ROUTES.LOGIN_ROUTE}
-                >
-                  <OverlayTrigger
-                    placement="bottom"
-                    overlay={
-                      <Tooltip id="profile-tooltip-top">
-                        {translate(`Stop! Don't click this!!`)}
-                      </Tooltip>
-                    }
-                  >
-                    <FontAwesomeIcon
-                      size="lg"
-                      icon={faUser}
-                      color={theme === THEMES.DARK ? "#fff" : "#7575dc"}
-                    />
-                  </OverlayTrigger>
-                </NavLink>
-              </Nav.Item>
+              <Nav.Item>{renderUserMenu()}</Nav.Item>
               <Nav.Item>
                 <span
                   id={styles["theme-btn"]}

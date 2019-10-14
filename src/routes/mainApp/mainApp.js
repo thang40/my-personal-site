@@ -12,7 +12,9 @@ import {
   LoadingSpinner
 } from "../../components";
 import { Route } from "react-router-dom";
+import { connect } from "react-redux";
 import { languageContext, themeContext } from "../../contexts";
+import { logoutAction } from "../../ducks";
 import { withInt } from "../../HOCs/withInt";
 import { ROUTES } from "../../consts";
 import {
@@ -25,7 +27,7 @@ import {
 
 const IntHeader = withInt(Header);
 
-const MainApp = () => {
+const MainApp = ({ logoutAction }) => {
   const [minBodyHeight, setMinBodyHeight] = useState(0);
   const { language, toggleLanguage } = useContext(languageContext);
   const { theme, toggleTheme } = useContext(themeContext);
@@ -45,6 +47,7 @@ const MainApp = () => {
         language={language}
         toggleTheme={toggleTheme}
         toggleLanguage={toggleLanguage}
+        logoutAction={logoutAction}
       />
 
       <SmallContainer theme={theme} style={{ minHeight: minBodyHeight }}>
@@ -67,4 +70,9 @@ const MainApp = () => {
   );
 };
 
-export default MainApp;
+export default connect(
+  state => state,
+  {
+    logoutAction: logoutAction
+  }
+)(MainApp);

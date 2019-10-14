@@ -26,7 +26,7 @@ export const initStore = handleSagaError => {
 
   sagaMiddleware = createSagaMiddleware({
     onError: error => {
-      if (isProd) {
+      if (!isProd) {
         console.log(error);
       }
     }

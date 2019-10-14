@@ -61,25 +61,26 @@ function* watchLogin(action) {
   const adminPassword = process.env.REACT_APP_ADMIN_PASSWORD;
   const { loginValues, handleEvents } = action.payload;
   const { username, password } = loginValues;
-  const { handleFail, handleSuccess, handleError } = handleEvents;
+  const { handleFail, handleSuccess } = handleEvents;
   try {
     if (username === adminUsername && password === adminPassword) {
       const authValues = {
         apiToken: "Fake Token KEKW",
         name: "le van thang",
+        username: username,
         roles: ["admin", "user", "VIP"]
       };
       localStorage.setItem("auth", JSON.stringify(authValues));
+      handleSuccess();
       yield put({
         type: LOGIN_SUCCESS,
         payload: authValues
       });
-      handleSuccess();
     } else {
       handleFail();
     }
   } catch (error) {
-    handleError();
+    console.log(error);
   }
 }
 

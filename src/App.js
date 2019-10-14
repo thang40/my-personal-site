@@ -77,6 +77,7 @@ const App = () => {
                 <Route component={Page404Route} />
               </Switch>
             </Suspense>
+            <div id="toast-root" style={{ position: "relative" }}></div>
           </themeContext.Provider>
         </languageContext.Provider>
       </Router>

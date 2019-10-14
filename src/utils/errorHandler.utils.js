@@ -1,4 +1,5 @@
 import { API_ERROR } from "../consts/error.const";
+import Axios from "axios";
 
 export const axiosErrorHandler = error => {
   if (process.env.NODE_ENV !== "production") {
@@ -24,5 +25,7 @@ export const axiosErrorHandler = error => {
       console.groupEnd();
     }
   }
-  throw API_ERROR;
+  if (!Axios.isCancel(error)) {
+    throw API_ERROR;
+  }
 };

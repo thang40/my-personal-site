@@ -5,11 +5,18 @@ export const useBlogList = (defaultValue = []) => {
   const [blogList, setBlogList] = useState(defaultValue);
   const [loading, setIsLoading] = useState(true);
   useEffect(() => {
+    let didCancel = false;
     const getBlogListWrapper = async () => {
-      setBlogList(await getBlogList());
-      setIsLoading(false);
+      const list = await getBlogList();
+      if (list && !didCancel) {
+        setBlogList(list);
+        setIsLoading(false);
+      }
     };
     getBlogListWrapper();
+    return () => {
+      didCancel = true;
+    };
   }, []);
   return [blogList, setBlogList, loading, setIsLoading];
 };

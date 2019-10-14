@@ -3,18 +3,15 @@ import { isLoggedIn } from "../services/auth.service";
 import { useSelector } from "react-redux";
 import { selectUsername, selectUserRoles } from "../ducks";
 
-export const useAuthStatus = authStatus => {
-  const [isAuth, setIsAuth] = useState(authStatus);
+export const useAuthStatus = () => {
+  const [isAuth, setIsAuth] = useState();
   const username = useSelector(selectUsername);
-  const checkAuth = async () => {
-    (await isLoggedIn()) ? setIsAuth(true) : setIsAuth(false);
+  const checkAuth = () => {
+    isLoggedIn() ? setIsAuth(true) : setIsAuth(false);
   };
 
   useEffect(() => {
     checkAuth();
-    return () => {
-      console.log("clean up");
-    };
   }, [username]);
   return isAuth;
 };

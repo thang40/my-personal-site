@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Nav, Button } from "react-bootstrap";
@@ -9,16 +9,27 @@ import { withInt } from "../../HOCs/withInt";
 import { THEMES, themeContext, languageContext } from "../../contexts";
 import { loginAction } from "../../ducks";
 import { ROUTES } from "../../consts";
+import { useAuthStatus } from "../../hooks/authHooks";
 import { ToastService } from "../../services/toast.service";
 import styles from "./login-route.module.scss";
 
-const toastService = new ToastService();
 const IntLoginForm = withInt(LoginForm);
+const toastService = new ToastService();
 
-export const _LoginRoute = ({ loginAction }) => {
+export const _LoginRoute = ({ loginAction, history }) => {
+  const isAuth = useAuthStatus();
   const [isLoading, setIsLoading] = useState(false);
   const { toggleTheme, theme } = useContext(themeContext);
   const { language, toggleLanguage, translate } = useContext(languageContext);
+
+  useEffect(() => {
+    if (isAuth) {
+      toastService.alert(
+        translate("Hey you already logged in, why are you here??? 😠😠"),
+        10000
+      );
+    }
+  }, [isAuth, translate]);
 
   const displayLang = lang => {
     if (lang === "vi") {
@@ -32,6 +43,7 @@ export const _LoginRoute = ({ loginAction }) => {
   };
   const handleLoginSuccess = () => {
     setIsLoading(false);
+    history.push(ROUTES.HOME_ROUTE);
     toastService.alert("COOL! YOU REALLY ARE ME!!", 5000);
   };
   const handleLogin = value => {
@@ -81,7 +93,11 @@ export const _LoginRoute = ({ loginAction }) => {
         </h1>
         <h2 className="display-4 text-center">{translate("ARE YOU ME?")}</h2>
         <section className="d-flex justify-content-center mt-4">
-          <IntLoginForm handleSubmit={handleLogin} isLoading={isLoading} />
+          <IntLoginForm
+            handleSubmit={handleLogin}
+            isLoading={isLoading}
+            disabled={isAuth}
+          />
         </section>
       </SmallContainer>
     </div>

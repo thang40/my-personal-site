@@ -10,10 +10,15 @@ const hashnodeAxios = axios.create({
   }
 });
 
+const cancelToken = axios.CancelToken;
+const source = cancelToken.source();
+
 export const getBlogList = async () => {
   try {
-    const res = await hashnodeAxios.post("", {
-      query: `query {
+    const res = await hashnodeAxios.post(
+      "",
+      {
+        query: `query {
           user(username: "thangle") {
             publication {
               posts(page:0){
@@ -26,13 +31,19 @@ export const getBlogList = async () => {
             }
           }
         }`
-    });
+      },
+      { cancelToken: source.token }
+    );
     const { data } = res;
     const publication = data.data.user.publication;
     return publication === null ? [] : publication.posts;
   } catch (error) {
     axiosErrorHandler(error);
   }
+};
+
+export const cancelGetBlogList = () => {
+  source.cancel("getbloglist cancelled");
 };
 
 export const getBlogDetail = async id => {

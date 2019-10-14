@@ -9,7 +9,7 @@ const schema = yup.object({
   password: yup.string().required()
 });
 
-export const LoginForm = ({ handleSubmit, isLoading, translate }) => (
+export const LoginForm = ({ handleSubmit, isLoading, disabled, translate }) => (
   <Formik
     validationSchema={schema}
     onSubmit={handleSubmit}
@@ -26,6 +26,7 @@ export const LoginForm = ({ handleSubmit, isLoading, translate }) => (
           <Form.Group as={Col} md="12" controlId="username">
             <Form.Label>{translate("What is my Username?")}</Form.Label>
             <Form.Control
+              disabled={disabled}
               type="text"
               placeholder={translate("USERNAME ONLY I KNOW")}
               name="username"
@@ -42,6 +43,7 @@ export const LoginForm = ({ handleSubmit, isLoading, translate }) => (
           <Form.Group as={Col} md="12" controlId="password">
             <Form.Label>{translate("Only me know the password")}</Form.Label>
             <Form.Control
+              disabled={disabled}
               type="password"
               placeholder={translate("PASSWORD ONLY I KNOWS")}
               name="password"
@@ -54,7 +56,12 @@ export const LoginForm = ({ handleSubmit, isLoading, translate }) => (
             </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
-        <Button type="submit" variant="warning" style={{ minWidth: "8rem" }}>
+        <Button
+          type="submit"
+          disabled={disabled}
+          variant="warning"
+          style={{ minWidth: "8rem" }}
+        >
           {isLoading ? (
             <LoadingSpinner size="sm" as="span" />
           ) : (

@@ -15,19 +15,20 @@ export class ToastService {
     this.toastPlacement.setAttribute("id", "toast-placement");
     this.toastPlacement.setAttribute(
       "style",
-      "position: absolute; bottom: 0; right: 0"
+      "position: absolute; bottom: 20px; right: 20px"
     );
     document.body.appendChild(this.toastRoot);
     this.toastRoot.appendChild(this.toastPlacement);
   }
 
-  onToastClose = id => {
-    this.toastArr = this.toastArr.filter(item => item.id !== id);
+  onToastClose = toastId => {
+    this.toastArr = this.toastArr.filter(item => item.id !== toastId);
     this.renderToastes();
   };
 
   alert = (msg, delay) => {
     const id = `toast-${this.counter++}`;
+    // const id = Symbol("id");
     this.toastContainerIds.push(id);
     const container = this.createContainer(id);
     ReactDOM.render(
@@ -50,8 +51,8 @@ export class ToastService {
     return toastContainer;
   };
 
-  unmountToast = id => {
-    const container = document.getElementById(id);
+  unmountToast = toastId => {
+    const container = document.getElementById(toastId);
     ReactDOM.unmountComponentAtNode(container);
     this.toastPlacement.removeChild(container);
   };
