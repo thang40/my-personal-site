@@ -27,7 +27,7 @@ export const ProfileCard = ({ theme, translate }) => {
             placement="top"
             overlay={
               <Tooltip id="profile-tooltip-top">
-                {translate(`Meaning "Thang" that's my Vietnamese name`)}
+                {translate(`Meaning "Thắng" that's my Vietnamese name`)}
               </Tooltip>
             }
           >

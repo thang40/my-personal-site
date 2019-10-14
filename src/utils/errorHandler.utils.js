@@ -17,10 +17,10 @@ export const axiosErrorHandler = error => {
       console.group("error request");
       console.log(error.request);
       console.log(error.message);
+      console.groupEnd();
       if (error.message.indexOf("timeout") > -1) {
         throw new HTTPTimeoutError();
       }
-      console.groupEnd();
     } else {
       // Something happened in setting up the request that triggered an Error
       console.group("Not a Http Error");
