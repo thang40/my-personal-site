@@ -4,10 +4,12 @@ import {
 } from "../../services/pokeAPI.service";
 import { put, takeLatest, select, all, delay, fork } from "redux-saga/effects";
 import Fuse from "fuse.js";
+import { HTTPTimeoutError } from "../../commons/types/errors";
 
 const INIT_POKEMON_NAME_SUCCESS = "@@FUN_POKEDEX/INIT_POKEMON_NAME_SUCCESS";
 const SEARCH_POKEMON_REQUEST = "@@FUN_POKEDEX/SEARCH_POKEMON_REQUEST";
 const SEARCH_POKEMON_SUCCESS = "@@FUN_POKEDEX/SEARCH_POKEMON_SUCCESS";
+const API_TIMEOUT_ERROR = "@@FUN_POKEDEX/API_TIMEOUT_ERROR";
 const RESET_LISTVIEW = "@@FUN_POKEDEX/RESET_LIST_VIEW";
 
 // action creator
@@ -24,7 +26,8 @@ const initialState = {
   detailList: [], //preload pokemon details to get image
   detailView: undefined, //current detail view
   listView: [], // paginated list
-  loading: true
+  loading: true,
+  errorMsg: ""
 };
 
 export const FunPokedexReducer = (state = initialState, action) => {
@@ -42,7 +45,8 @@ export const FunPokedexReducer = (state = initialState, action) => {
     case SEARCH_POKEMON_REQUEST: {
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        errorMsg: ""
       };
     }
     case SEARCH_POKEMON_SUCCESS: {
@@ -58,10 +62,17 @@ export const FunPokedexReducer = (state = initialState, action) => {
         isLoading: false
       };
     }
+    case API_TIMEOUT_ERROR: {
+      return {
+        ...state,
+        errorMsg: action.payload
+      };
+    }
     case RESET_LISTVIEW: {
       return {
         ...state,
-        listView: []
+        listView: [],
+        errorMsg: ""
       };
     }
     default: {
@@ -76,6 +87,7 @@ export const selectPokemonListView = state => state.FunPokedexReducer.listView;
 export const selectDetailList = state => state.FunPokedexReducer.detailList;
 export const selectPkmPerPage = state => state.FunPokedexReducer.pkmPerPage;
 export const selectIsLoading = state => state.FunPokedexReducer.isLoading;
+export const selectErrorMsg = state => state.FunPokedexReducer.errorMsg;
 
 function* watchInitPokemonName(action) {
   try {
@@ -91,7 +103,9 @@ function* watchInitPokemonName(action) {
       payload: { pokemonNames, details }
     });
   } catch (error) {
-    console.log(error);
+    if (error instanceof HTTPTimeoutError) {
+      yield put({ type: API_TIMEOUT_ERROR, payload: error.friendlyMsg });
+    }
   }
 }
 
@@ -127,7 +141,9 @@ function* watchSearchPokemon(action) {
     );
     yield put({ type: SEARCH_POKEMON_SUCCESS, payload: pkmDetailsPayload });
   } catch (error) {
-    console.log(error);
+    if (error instanceof HTTPTimeoutError) {
+      yield put({ type: API_TIMEOUT_ERROR, payload: error.friendlyMsg });
+    }
   }
 }
 
