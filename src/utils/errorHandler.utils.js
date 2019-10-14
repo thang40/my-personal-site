@@ -1,5 +1,4 @@
-import { API_ERROR } from "../consts/error.const";
-import Axios from "axios";
+import { HTTPTimeoutError, APIError } from "../commons/types/errors";
 
 export const axiosErrorHandler = error => {
   if (process.env.NODE_ENV !== "production") {
@@ -17,6 +16,10 @@ export const axiosErrorHandler = error => {
       // http.ClientRequest in node.js
       console.group("error request");
       console.log(error.request);
+      console.log(error.message);
+      if (error.message.indexOf("timeout") > -1) {
+        throw new HTTPTimeoutError();
+      }
       console.groupEnd();
     } else {
       // Something happened in setting up the request that triggered an Error
@@ -25,7 +28,5 @@ export const axiosErrorHandler = error => {
       console.groupEnd();
     }
   }
-  if (!Axios.isCancel(error)) {
-    throw API_ERROR;
-  }
+  throw new APIError();
 };

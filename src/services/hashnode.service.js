@@ -3,7 +3,7 @@ import { axiosErrorHandler } from "../utils/errorHandler.utils";
 
 const hashnodeAxios = axios.create({
   baseURL: "https://api.hashnode.com",
-  timeout: 10000,
+  timeout: 5000,
   headers: {
     "Content-Type": "application/json",
     Authorization: "7cca50ac-d08f-4ca0-a77e-655cb8cc7d94"

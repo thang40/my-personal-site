@@ -17,10 +17,13 @@ const IntIntroHero = withInt(IntroHero);
 
 export const HomeRoute = () => {
   const { theme } = useContext(themeContext);
-  const [blogList, , isLoading] = useBlogList();
+  const [blogList, isLoading, errorMsg] = useBlogList();
   const { translate } = useContext(languageContext);
 
   const renderBlogList = () => {
+    if (errorMsg.length) {
+      return <div className="text-center">{translate(errorMsg)}</div>;
+    }
     if (isLoading) {
       return (
         <div className="text-center">

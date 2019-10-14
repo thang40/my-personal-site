@@ -4,12 +4,15 @@ import { BlogCard, LoadingSpinner } from "../../../components";
 import { useBlogList } from "../../../hooks/blogHooks";
 import { languageContext, themeContext } from "../../../contexts";
 
-const BlogRoute = ({ history }) => {
+const BlogRoute = () => {
   const { theme } = useContext(themeContext);
-  const [blogList, , isLoading] = useBlogList();
+  const [blogList, isLoading, errorMsg] = useBlogList();
   const { translate, datetimeFormat } = useContext(languageContext);
 
   const renderBlogList = () => {
+    if (errorMsg.length) {
+      return <Col className="text-center">{translate(errorMsg)}</Col>;
+    }
     if (isLoading) {
       return (
         <Col className="text-center">
