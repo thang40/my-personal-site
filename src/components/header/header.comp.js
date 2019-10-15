@@ -34,6 +34,19 @@ export const Header = React.forwardRef(
       }
       return lang;
     };
+    const renderLeftMenu = (routePath, text) => {
+      return (
+        <span className="nav-link">
+          <NavLink
+            exact={true}
+            activeClassName={styles["active"]}
+            to={routePath}
+          >
+            {translate(text)}
+          </NavLink>
+        </span>
+      );
+    };
     const renderUserMenu = () => {
       return (
         <NavLink
@@ -66,6 +79,33 @@ export const Header = React.forwardRef(
         </NavLink>
       );
     };
+    const renderThemeBtn = () => {
+      return (
+        <span
+          id={styles["theme-btn"]}
+          className="nav-link"
+          onClick={toggleTheme}
+        >
+          <FontAwesomeIcon
+            size="lg"
+            icon={theme === THEMES.DARK ? faMoon : faSun}
+            color={theme === THEMES.DARK ? "#f5f3ce" : "#FDB813"}
+          />
+        </span>
+      );
+    };
+    const renderLanguageBtn = () => {
+      return (
+        <Button
+          variant={theme === THEMES.DARK ? "outline-light" : "outline-dark"}
+          onClick={toggleLanguage}
+          className="text-uppercase"
+          id={styles["lang-btn"]}
+        >
+          <div>{displayLang(language)}</div>
+        </Button>
+      );
+    };
     return (
       <header id={styles["header"]} ref={ref} className={styles[theme]}>
         <Navbar expand="lg" id={styles["header-nav"]}>
@@ -75,80 +115,15 @@ export const Header = React.forwardRef(
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <span className="nav-link">
-                <NavLink
-                  exact={true}
-                  activeClassName={styles["active"]}
-                  to={ROUTES.HOME_ROUTE}
-                >
-                  {translate("Home")}
-                </NavLink>
-              </span>
-
-              <span className="nav-link">
-                <NavLink
-                  exact={true}
-                  activeClassName={styles["active"]}
-                  to={ROUTES.BLOG_ROUTE}
-                >
-                  {translate("Blogs")}
-                </NavLink>
-              </span>
-              <span className="nav-link">
-                <NavLink
-                  exact={true}
-                  activeClassName={styles["active"]}
-                  to={ROUTES.FUN_ROUTE}
-                >
-                  {translate("Fun")}
-                </NavLink>
-              </span>
-              {/* <span className="nav-link">
-                <NavLink
-                  exact={true}
-                  activeClassName={styles["active"]}
-                  to="/about-me"
-                >
-                  {translate("About Me")}
-                </NavLink>
-              </span> */}
-              <span className="nav-link">
-                <NavLink
-                  exact={true}
-                  activeClassName={styles["active"]}
-                  to={ROUTES.CONTACT_ROUTE}
-                >
-                  {translate("Contact")}
-                </NavLink>
-              </span>
+              {renderLeftMenu(ROUTES.HOME_ROUTE, "Home")}
+              {renderLeftMenu(ROUTES.BLOG_ROUTE, "Blogs")}
+              {renderLeftMenu(ROUTES.FUN_ROUTE, "Fun")}
+              {renderLeftMenu(ROUTES.CONTACT_ROUTE, "Contact")}
             </Nav>
             <Nav className="justify-content-end">
               <Nav.Item>{renderUserMenu()}</Nav.Item>
-              <Nav.Item>
-                <span
-                  id={styles["theme-btn"]}
-                  className="nav-link"
-                  onClick={toggleTheme}
-                >
-                  <FontAwesomeIcon
-                    size="lg"
-                    icon={theme === THEMES.DARK ? faMoon : faSun}
-                    color={theme === THEMES.DARK ? "#f5f3ce" : "#FDB813"}
-                  />
-                </span>
-              </Nav.Item>
-              <Nav.Item>
-                <Button
-                  variant={
-                    theme === THEMES.DARK ? "outline-light" : "outline-dark"
-                  }
-                  onClick={toggleLanguage}
-                  className="text-uppercase"
-                  id={styles["lang-btn"]}
-                >
-                  <div>{displayLang(language)}</div>
-                </Button>
-              </Nav.Item>
+              <Nav.Item>{renderThemeBtn()}</Nav.Item>
+              <Nav.Item>{renderLanguageBtn()}</Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
