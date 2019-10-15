@@ -17,7 +17,7 @@ export const useBlogList = (defaultValue = []) => {
         }
       } catch (error) {
         if (error instanceof HTTPTimeoutError) {
-          setErrorMsg("Oi, I think your network is down or something!! 😢");
+          setErrorMsg(error.friendlyMsg);
         } else {
           throw error;
         }

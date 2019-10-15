@@ -7,5 +7,6 @@ export const FUN_ROUTE = "/fun";
 export const FUN_POKEDEX_ROUTE = `${FUN_ROUTE}/pokedex`;
 export const FUN_AUTH_ROUTE = `${FUN_ROUTE}/auth`;
 export const CONTACT_ROUTE = "/contact";
+export const ADMIN_ROUTE = "/admin";
 export const ROUTE_BASENAME =
   process.env.NODE_ENV === "production" ? "/my-personal-site" : "/";

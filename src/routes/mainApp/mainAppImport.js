@@ -36,3 +36,10 @@ export const BlogDetailRoute = lazy(() => {
     new Promise(resolve => setTimeout(resolve, delayTime))
   ]).then(([moduleExports]) => moduleExports);
 });
+
+export const AdminRoute = lazy(() => {
+  return Promise.all([
+    import("./admin/admin.route"),
+    new Promise(resolve => setTimeout(resolve, delayTime))
+  ]).then(([moduleExports]) => moduleExports);
+});

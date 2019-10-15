@@ -18,6 +18,7 @@ import { logoutAction } from "../../ducks";
 import { withInt } from "../../HOCs/withInt";
 import { ROUTES } from "../../consts";
 import {
+  AdminRoute,
   FunRoute,
   HomeRoute,
   BlogRoute,
@@ -63,6 +64,7 @@ const MainApp = ({ logoutAction }) => {
           <Route path={ROUTES.BLOG_DETAIL_ROUTE} component={BlogDetailRoute} />
           <Route path={ROUTES.FUN_ROUTE} component={FunRoute} />
           <Route path={ROUTES.CONTACT_ROUTE} component={ContactRoute} />
+          <Route path={ROUTES.ADMIN_ROUTE} component={AdminRoute} />
         </Suspense>
       </SmallContainer>
       <Footer theme={theme} ref={footerRef} />
