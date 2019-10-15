@@ -12,9 +12,9 @@ export const AdminRoute = () => {
   const isAuth = useAuthStatus();
   useEffect(() => {
     if (!isAuth) {
-      toastService.alert("hey you are not supposed to be here!!");
+      toastService.alert("hey you are not supposed to be here!!", 5000);
     }
-  }, []);
+  }, [isAuth]);
   const handleDateClick = arg => {
     console.log(arg);
   };
