@@ -56,7 +56,7 @@ export const _LoginRoute = ({ loginAction, history }) => {
     }, 1000);
   };
   return (
-    <div id={styles["login"]} className="vh-100 text-white-50">
+    <div id={styles["login"]} className="text-white-50">
       <nav className="pt-2 pb-2 pl-4 pr-4 d-flex">
         <Nav className="mr-auto align-items-center">
           <Nav.Item>
