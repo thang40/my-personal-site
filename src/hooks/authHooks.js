@@ -3,8 +3,8 @@ import { isLoggedIn } from "../services/auth.service";
 import { useSelector } from "react-redux";
 import { selectUsername, selectUserRoles } from "../ducks";
 
-export const useAuthStatus = () => {
-  const [isAuth, setIsAuth] = useState(false);
+export const useAuthStatus = (defaultValue = false) => {
+  const [isAuth, setIsAuth] = useState(defaultValue);
   const username = useSelector(selectUsername);
   const checkAuth = () => {
     isLoggedIn() ? setIsAuth(true) : setIsAuth(false);

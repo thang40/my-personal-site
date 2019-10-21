@@ -9,7 +9,7 @@ import styles from "./admin-route.module.scss";
 const toastService = new ToastService();
 
 export const AdminRoute = () => {
-  const isAuth = useAuthStatus();
+  const isAuth = useAuthStatus(true);
   useEffect(() => {
     if (!isAuth) {
       toastService.alert("hey you are not supposed to be here!!", 5000);
