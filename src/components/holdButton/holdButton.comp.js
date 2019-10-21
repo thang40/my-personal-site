@@ -12,22 +12,33 @@ export const HoldButton = ({
   ...rest
 }) => {
   const [showLoading, setShowLoading] = useState(false);
+  const [isHolding, setIsHolding] = useState(false);
   useEffect(() => {
     return () => {
       clearTimeout(timer);
     };
   });
+
   let timer;
+
+  const handleClick = e => {
+    if (enableHolding && isHolding) {
+      e.preventDefault();
+    }
+  };
+
   const handleHolding = () => {
     if (enableHolding) {
       timer = setTimeout(() => {
+        setIsHolding(true);
         showLoadingAndCallHandler();
-      }, 1000);
+      }, 2000);
     }
   };
 
   const handleRelease = () => {
     if (enableHolding) {
+      setIsHolding(false);
       clearTimeout(timer);
     }
   };
@@ -37,6 +48,7 @@ export const HoldButton = ({
 
     setTimeout(() => {
       setShowLoading(false);
+      setIsHolding(false);
       handleAfterHold();
     }, 3000);
   };
@@ -45,7 +57,8 @@ export const HoldButton = ({
     <div
       {...rest}
       onMouseDown={showLoading ? null : handleHolding}
-      onMouseLeave={showLoading ? null : handleRelease}
+      onMouseUp={showLoading ? null : handleRelease}
+      onClick={handleClick}
     >
       <FontAwesomeIcon
         icon={showLoading ? faCog : icon}
