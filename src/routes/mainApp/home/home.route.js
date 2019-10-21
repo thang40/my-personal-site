@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import {
   ProfileCard,
@@ -11,6 +11,7 @@ import { useBlogList } from "../../../hooks/blogHooks";
 import { ROUTES } from "../../../consts";
 import { withInt } from "../../../HOCs/withInt";
 import { languageContext, themeContext } from "../../../contexts";
+import { getRepoDetails } from "../../../services/github.service";
 
 const IntProfileCard = withInt(ProfileCard);
 const IntIntroHero = withInt(IntroHero);
@@ -19,6 +20,10 @@ export const HomeRoute = () => {
   const { theme } = useContext(themeContext);
   const [blogList, isLoading, errorMsg] = useBlogList();
   const { translate } = useContext(languageContext);
+
+  useEffect(() => {
+    getRepoDetails();
+  }, []);
 
   const renderBlogList = () => {
     if (errorMsg.length) {
