@@ -1,0 +1,1 @@
+{"version":3,"sources":["routes/404/404.route.js"],"names":["Page404Route"],"mappings":"mHAAA,wEAEaA,EAAe,kBAAM,oDAEnBA","file":"static/js/11.900b419b.chunk.js","sourcesContent":["import React from \"react\";\n\nexport const Page404Route = () => <div>404 Page not found</div>;\n\nexport default Page404Route;\n"],"sourceRoot":""}

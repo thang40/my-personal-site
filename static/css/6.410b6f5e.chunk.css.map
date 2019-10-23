@@ -1,0 +1,1 @@
+{"version":3,"sources":["contact-route.module.scss"],"names":[],"mappings":"AAAA,sCACE,cAAe,CACf,eAAgB,CAChB,kBAAmB","file":"6.410b6f5e.chunk.css","sourcesContent":["#substack-iframe {\n  max-width: 100%;\n  background: #fff;\n  border-radius: 10px;\n}\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["login-route.module.scss"],"names":[],"mappings":"AAAA,0BACE,wFAA0E,CAC1E,gBAAiB","file":"3.0252ea7f.chunk.css","sourcesContent":["#login {\n  background: url(\"../../assets/login-bg.jpg\") no-repeat center center fixed;\n  min-height: 100vh;\n}\n"]}
