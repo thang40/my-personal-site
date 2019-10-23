@@ -1,0 +1,48 @@
+#box {
+  width: 200px;
+  border-radius: 5px;
+}
+
+#box.dark {
+  background: black;
+  color: white;
+  border: solid 1px white;
+}
+
+#box.light {
+  background: white;
+  color: black;
+  border: solid 1px black;
+}
+
+#box ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 5px 10px;
+}
+
+#box li {
+  line-height: 1;
+  padding: 7px 0;
+}
+
+#box.dark li {
+  border-bottom: 1px solid #f1f1f1;
+}
+
+#box.light li {
+  border-bottom: 1px solid #f1f1f1;
+}
+
+#box li:last-child {
+  border-bottom: none;
+}
+
+@media (min-width: 1024px) {
+  #box {
+    position: absolute;
+    right: 155px;
+    top: 60px;
+    z-index: 1;
+  }
+}

@@ -14,7 +14,11 @@ import {
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { languageContext, themeContext } from "../../contexts";
-import { logoutAction } from "../../ducks";
+import {
+  logoutAction,
+  fetchNewCommitsAction,
+  selectCommits
+} from "../../ducks";
 import { withInt } from "../../HOCs/withInt";
 import { ROUTES } from "../../consts";
 import {
@@ -28,7 +32,7 @@ import {
 
 const IntHeader = withInt(Header);
 
-const MainApp = ({ logoutAction }) => {
+const MainApp = ({ logoutAction, fetchCommits, commits }) => {
   const [minBodyHeight, setMinBodyHeight] = useState(0);
   const { language, toggleLanguage } = useContext(languageContext);
   const { theme, toggleTheme } = useContext(themeContext);
@@ -40,6 +44,12 @@ const MainApp = ({ logoutAction }) => {
     setMinBodyHeight(window.innerHeight - headerHeight - footerHeight);
   }, []);
 
+  useEffect(() => {
+    setInterval(() => {
+      fetchCommits();
+    }, 60000 * 5);
+  }, [fetchCommits]);
+
   return (
     <React.Fragment>
       <IntHeader
@@ -49,6 +59,7 @@ const MainApp = ({ logoutAction }) => {
         toggleTheme={toggleTheme}
         toggleLanguage={toggleLanguage}
         logoutAction={logoutAction}
+        commits={commits}
       />
 
       <SmallContainer theme={theme} style={{ minHeight: minBodyHeight }}>
@@ -73,8 +84,11 @@ const MainApp = ({ logoutAction }) => {
 };
 
 export default connect(
-  state => state,
+  state => ({
+    commits: selectCommits(state)
+  }),
   {
-    logoutAction: logoutAction
+    logoutAction: logoutAction,
+    fetchCommits: fetchNewCommitsAction
   }
 )(MainApp);

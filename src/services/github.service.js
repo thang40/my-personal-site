@@ -9,11 +9,11 @@ const githubAxios = axios.create({
   }
 });
 
-export const getRepoDetails = async () => {
+export const getCommits = async () => {
   try {
-    const res = await githubAxios.get("/commits");
+    const res = await githubAxios.get("/commits?per_page=3");
     const { data } = res;
-    console.log(data);
+    return data;
   } catch (error) {
     axiosErrorHandler(error);
   }

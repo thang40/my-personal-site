@@ -22,9 +22,18 @@ import styles from "./header-comp.module.scss";
 import logo from "../../assets/logo.svg";
 import { useAuthStatus } from "../../hooks/authHooks";
 import { HoldButton } from "../holdButton/holdButton.comp";
+import { InboxButton } from "../inboxButton/inboxButton.comp";
 export const Header = React.forwardRef(
   (
-    { theme, toggleTheme, language, logoutAction, toggleLanguage, translate },
+    {
+      theme,
+      toggleTheme,
+      language,
+      logoutAction,
+      commits,
+      toggleLanguage,
+      translate
+    },
     ref
   ) => {
     const isAuth = useAuthStatus();
@@ -50,7 +59,6 @@ export const Header = React.forwardRef(
     const renderUserMenu = () => {
       return (
         <NavLink
-          id={styles["theme-btn"]}
           className="nav-link"
           exact={true}
           activeClassName={styles["active"]}
@@ -106,6 +114,17 @@ export const Header = React.forwardRef(
         </Button>
       );
     };
+    const renderRecentUpdateBtn = () => {
+      return (
+        <span className="nav-link">
+          <InboxButton
+            inboxMsgs={commits}
+            theme={theme}
+            color={theme === THEMES.DARK ? "white" : "black"}
+          />
+        </span>
+      );
+    };
     return (
       <header id={styles["header"]} ref={ref} className={styles[theme]}>
         <Navbar expand="lg" id={styles["header-nav"]}>
@@ -121,6 +140,7 @@ export const Header = React.forwardRef(
               {renderLeftMenu(ROUTES.CONTACT_ROUTE, "Contact")}
             </Nav>
             <Nav className="justify-content-end">
+              <Nav.Item>{renderRecentUpdateBtn()}</Nav.Item>
               <Nav.Item>{renderUserMenu()}</Nav.Item>
               <Nav.Item>{renderThemeBtn()}</Nav.Item>
               <Nav.Item>{renderLanguageBtn()}</Nav.Item>

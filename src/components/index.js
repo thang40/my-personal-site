@@ -14,3 +14,4 @@ export * from "./searchBar/searchBar.comp";
 export * from "./loadingSpinner/loadingSpinner.comp";
 export * from "./loginForm/loginForm.comp";
 export * from "./customToast/customToast.comp";
+export * from "./inboxButton/inboxButton.comp";

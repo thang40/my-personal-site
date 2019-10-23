@@ -4,21 +4,24 @@ import {
   HomeReducer,
   AuthReducer,
   FunPokedexReducer,
+  GitHubReducer,
   AuthSaga,
-  FunPokedexSaga
+  FunPokedexSaga,
+  GitHubSaga
 } from "./ducks";
 import { all } from "redux-saga/effects";
 
 const RootReducer = combineReducers({
   AuthReducer,
   HomeReducer,
-  FunPokedexReducer
+  FunPokedexReducer,
+  GitHubReducer
 });
 let sagaMiddleware;
 const isProd = process.env.NODE_ENV === "production";
 
 function* rootSaga() {
-  yield all([...AuthSaga, ...FunPokedexSaga]);
+  yield all([...AuthSaga, ...FunPokedexSaga, ...GitHubSaga]);
 }
 export const initStore = handleSagaError => {
   const composeEnhancers =
