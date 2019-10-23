@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import styles from "./itemBar-comp.module.scss";
 import { Row, Col } from "react-bootstrap";
 import { ProgressiveImage } from "../progressiveImage/progressiveImage.comp";
-import { datetimeUtils } from "../../utils/datetime.utils";
 
 export const ItemBar = ({ imageSrc, title, createdDate, ...props }) => {
   return (
@@ -19,7 +18,7 @@ export const ItemBar = ({ imageSrc, title, createdDate, ...props }) => {
         <Col lg="10">
           <h6 className="text-capitalize">{title}</h6>
           <p className={styles["date-time"]}>
-            {createdDate ? datetimeUtils.format(createdDate) : ""}
+            {createdDate ? createdDate : ""}
           </p>
         </Col>
       </Row>

@@ -19,7 +19,7 @@ import {
   fetchNewCommitsAction,
   selectCommits
 } from "../../ducks";
-import { withInt } from "../../HOCs/withInt";
+import { withInt, withAuth } from "../../HOCs";
 import { ROUTES } from "../../consts";
 import {
   AdminRoute,
@@ -30,7 +30,7 @@ import {
   BlogDetailRoute
 } from "./mainAppImport";
 
-const IntHeader = withInt(Header);
+const IntHeader = withAuth(withInt(Header));
 
 const MainApp = ({ logoutAction, fetchCommits, commits }) => {
   const [minBodyHeight, setMinBodyHeight] = useState(0);

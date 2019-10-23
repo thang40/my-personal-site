@@ -1,11 +1,15 @@
 import moment from "moment";
 import "moment/locale/vi";
 
-export const datetimeUtils = {
-  setLocale: locale => {
-    moment.locale(locale);
-  },
-  format: datetimeStr => {
-    return moment(datetimeStr).format("LL");
-  }
+export const setLocale = locale => {
+  moment.locale(locale);
+};
+
+export const format = (datetimeStr, format = "LL") => {
+  return moment(datetimeStr).format(format);
+};
+
+export default {
+  setLocale,
+  format
 };

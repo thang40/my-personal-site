@@ -5,7 +5,7 @@ import { Nav, Button } from "react-bootstrap";
 import { faHome, faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon as Icon } from "@fortawesome/react-fontawesome";
 import { LoginForm, SmallContainer } from "../../components";
-import { withInt } from "../../HOCs/withInt";
+import { withInt } from "../../HOCs";
 import { THEMES, themeContext, languageContext } from "../../contexts";
 import { loginAction } from "../../ducks";
 import { ROUTES } from "../../consts";

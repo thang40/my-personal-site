@@ -20,7 +20,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import styles from "./header-comp.module.scss";
 import logo from "../../assets/logo.svg";
-import { useAuthStatus } from "../../hooks/authHooks";
 import { HoldButton } from "../holdButton/holdButton.comp";
 import { InboxButton } from "../inboxButton/inboxButton.comp";
 export const Header = React.forwardRef(
@@ -32,11 +31,12 @@ export const Header = React.forwardRef(
       logoutAction,
       commits,
       toggleLanguage,
-      translate
+      translate,
+      datetimeFormat,
+      isAuth
     },
     ref
   ) => {
-    const isAuth = useAuthStatus();
     const displayLang = lang => {
       if (lang === "vi") {
         return "vn";
@@ -121,6 +121,8 @@ export const Header = React.forwardRef(
             inboxMsgs={commits}
             theme={theme}
             color={theme === THEMES.DARK ? "white" : "black"}
+            datetimeFormat={datetimeFormat}
+            translate={translate}
           />
         </span>
       );

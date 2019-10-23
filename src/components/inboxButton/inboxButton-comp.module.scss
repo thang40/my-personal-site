@@ -1,6 +1,16 @@
+@import "../../assets/sharedStyles/sharedStyles.scss";
+
 #box {
-  width: 200px;
+  width: 350px;
   border-radius: 5px;
+  font-size: $font-medium;
+}
+
+#box .date {
+  font-size: $font-small;
+  text-align: right;
+  opacity: 0.6;
+  padding-top: 5px;
 }
 
 #box.dark {

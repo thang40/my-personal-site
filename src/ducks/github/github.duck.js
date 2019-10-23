@@ -8,7 +8,6 @@ const GITHUB_FETCH_NEW_COMMITS_SUCCESS =
 
 // action creator
 export const fetchNewCommitsAction = () => {
-  console.log("hey");
   return { type: GITHUB_FETCH_NEW_COMMITS_REQUEST };
 };
 

@@ -3,6 +3,10 @@ $darkFg: #fff;
 $lightBg: #fefefe;
 $lightFg: #20232a;
 
+//font size
+$font-small: 0.7rem;
+$font-medium: 1rem;
+
 @mixin darkTheme {
   background-color: $darkBg;
   color: $darkFg;

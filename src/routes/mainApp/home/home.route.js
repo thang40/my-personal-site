@@ -9,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import { useBlogList } from "../../../hooks/blogHooks";
 import { ROUTES } from "../../../consts";
-import { withInt } from "../../../HOCs/withInt";
+import { withInt } from "../../../HOCs";
 import { languageContext, themeContext } from "../../../contexts";
 
 const IntProfileCard = withInt(ProfileCard);
@@ -18,7 +18,7 @@ const IntIntroHero = withInt(IntroHero);
 export const HomeRoute = () => {
   const { theme } = useContext(themeContext);
   const [blogList, isLoading, errorMsg] = useBlogList();
-  const { translate } = useContext(languageContext);
+  const { translate, datetimeFormat } = useContext(languageContext);
 
   const renderBlogList = () => {
     if (errorMsg.length) {
@@ -43,7 +43,7 @@ export const HomeRoute = () => {
           className="mb-2"
           title={blog.title}
           imageSrc={blog.coverImage}
-          createdDate={blog.dateAdded}
+          createdDate={datetimeFormat(blog.dateAdded)}
         />
       </Link>
     ));

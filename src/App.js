@@ -6,7 +6,7 @@ import { initStore, initSaga } from "./store";
 import { Provider } from "react-redux";
 import { ROUTES } from "./consts";
 import trans from "./assets/translations/translation.json";
-import moment from "moment";
+import dateTimeUtils from "./utils/datetime.utils";
 import { LoginRoute, MainApp, Page404Route } from "./routes";
 
 const { EN, VN } = LANGUAGES;
@@ -27,7 +27,7 @@ const App = () => {
     if (!localStorage.getItem("language")) {
       localStorage.setItem("language", EN);
     }
-    moment.locale(localStorage.getItem("language"));
+    dateTimeUtils.setLocale(localStorage.getItem("language"));
   }, []);
 
   const changeTheme = () => {
@@ -38,11 +38,11 @@ const App = () => {
   const changeLanguage = () => {
     const changedLang = language === EN ? VN : EN;
     localStorage.setItem("language", changedLang);
-    moment.locale(changedLang);
+    dateTimeUtils.setLocale(changedLang);
     setLanguage(changedLang);
   };
-  const datetimeFormat = datetimeStr => {
-    return moment(datetimeStr).format("LL");
+  const datetimeFormat = (datetimeStr, format = "LL") => {
+    return dateTimeUtils.format(datetimeStr, format);
   };
   const translate = text => {
     if (language === EN) {
